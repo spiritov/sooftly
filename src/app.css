@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+
+@font-face {
+	font-family: UbuntuMono;
+	font-style: normal;
+	src: url('$lib/fonts/UbuntuMono.ttf');
+}
+
+@theme {
+	--font-mono: 'UbuntuMono', 'mono';
+}
+
+@layer components {
+	html {
+		font-family: theme(--font-mono);
+		background-color: theme(--color-zinc-800);
+		color: theme(--color-zinc-300);
+
+		@variant selection {
+			background-color: theme(--color-purple-300);
+			color: theme(--color-zinc-800);
+		}
+	}
+}
