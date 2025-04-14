@@ -2,38 +2,52 @@
 	import { slide } from 'svelte/transition';
 	import { SvelteMap } from 'svelte/reactivity';
 
-	class Category {
-		constructor(name, array) {
-			this.name = name;
-			this.array = array;
-		}
-	}
 	let add = $state(true);
 	let arrow = $derived(add ? '˅' : '˃');
 
-	let players = $state(new Category('player', ['one', 'two']));
-	let flags = $state(new Category('flag', []));
-	let maps = $state(new Category('map', []));
-	let stage = $state(
-		new Category('stage', [
-			'Round 1',
-			'Round 2',
-			'Quarterfinals',
-			'Semifinals',
-			'Finals',
-			'Grand Finals',
-			"Loser's Quarters",
-			"Loser's Semis",
-			"Loser's Finals"
+	let categories = $state(
+		new SvelteMap([
+			['player', ['riot', 'exile', 'shanks', 'rellort']],
+			['flag', ['SE', 'KR']],
+			['map', ['jump_thing', 'jump_anotherthing']],
+			[
+				'stage',
+				[
+					'Round 1',
+					'Round 2',
+					'Quarterfinals',
+					'Semifinals',
+					'Finals',
+					'Grand Finals',
+					"Loser's Quarters",
+					"Loser's Semis",
+					"Loser's Finals"
+				]
+			]
 		])
 	);
-	let categories = $derived([players, flags, maps, stage]);
+	let inputs = $state(
+		new SvelteMap([
+			['player', ''],
+			['flag', ''],
+			['map', ''],
+			['stage', '']
+		])
+	);
 
-	let playerInput = '';
-	let flagInput = '';
-	let mapInput = '';
-	let stageInput = '';
-	let categoriesInput = $state([playerInput, flagInput, mapInput, stageInput]);
+	let sel_best_of = $state(0);
+	let sel_map = $state('');
+
+	let sel_left_player = $state('');
+	let sel_rght_player = $state('');
+	let sel_left_flag = $state('');
+	let sel_right_flag = $state('');
+	let sel_left_pr = $state('');
+	let sel_rght_pr = $state('');
+	let left_score = $state(0);
+	let rght_score = $state(0);
+
+	let stage = '';
 
 	function toggleAdd() {
 		add = !add;
@@ -43,15 +57,19 @@
 <div class="w-full justify-center">
 	<div class="mt-8 w-2xl flex-col rounded-md bg-zinc-300/10 p-4 text-center text-lg">
 		<div class="mb-8 justify-center text-violet-300">tourney overlay helper</div>
-		<button onclick={toggleAdd} class="flex w-96 cursor-pointer self-center">{arrow} toggle</button>
+		{#key arrow}
+			<button onclick={toggleAdd} class="flex w-96 cursor-pointer self-center"
+				>{arrow} toggle</button
+			>
+		{/key}
 		{#if add}
 			<div transition:slide={{ duration: 150 }} class="w-96 flex-col gap-1 self-center">
-				{#each categories as cat, i}
+				{#each categories as [name, array]}
 					<div class="relative justify-center">
-						{#if i == 1}
+						{#if name == 'flag'}
 							<a target="_blank" href="https://countryflagsapi.netlify.app/country-list">
 								<div class="absolute left-0 transition-colors hover:text-violet-300">
-									add {cat.name}
+									add {name}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										viewBox="0 0 20 20"
@@ -68,30 +86,43 @@
 								</div>
 							</a>
 						{:else}
-							<div class="absolute left-0">add {cat.name}</div>
+							<div class="absolute left-0">add {name}</div>
 						{/if}
 						<button
 							onclick={() => {
-								categories[i].array = [];
-								categories = categories;
+								categories.set(name, []);
 							}}
 							class="absolute right-0 cursor-pointer transition-colors hover:text-red-400 hover:underline"
 						>
 							remove all
 						</button>
-						{#if i == 1}
-							<input placeholder="alpha-2 code" class="input" />
+						{#if name == 'flag'}
+							<input
+								placeholder="alpha-2 code"
+								class="input"
+								onkeypress={(e) => {
+									if (e.key == 'Enter') {
+										if (e.target.value.length === 2) {
+											categories.set(
+												name,
+												categories.get(name).concat([e.target.value.toUpperCase()])
+											);
+										}
+										e.target.value = '';
+									}
+									inputs.set(name, e.target.value);
+								}}
+							/>
 						{:else}
 							<input
-								bind:value={categoriesInput[i]}
-								onkeydown={(pressed) => {
-									if (pressed.key == 'Enter') {
-										categories[i].array.push(categoriesInput[i]);
-										categoriesInput[i] = '';
-										categories = categories;
-									}
-								}}
 								class="input"
+								onkeypress={(e) => {
+									if (e.key == 'Enter') {
+										categories.set(name, categories.get(name).concat([e.target.value]));
+										e.target.value = '';
+									}
+									inputs.set(name, e.target.value);
+								}}
 							/>
 						{/if}
 					</div>
@@ -99,34 +130,114 @@
 			</div>
 		{/if}
 
-		<div class="mt-8 flex-row justify-between">
+		<div class="relative mt-8 w-96 justify-center gap-2 self-center">
+			<span class="absolute left-0">best of</span>
+			{#each { length: 5 }, i}
+				<button
+					class="button size-8 justify-center px-0 {i === sel_best_of
+						? 'border-violet-400 bg-violet-300'
+						: ''}"
+					onclick={() => {
+						sel_best_of = i;
+					}}>{i * 2 + 1}</button
+				>
+			{/each}
+		</div>
+
+		<div>map</div>
+		<div class="flex-wrap gap-2">
+			{#each categories.get('map') as map, i}
+				<button
+					class="button {map === sel_map ? 'border-violet-400 bg-violet-300' : ''}"
+					onclick={() => {
+						sel_map = map;
+					}}
+					oncontextmenu={(e) => {
+						e.preventDefault();
+						console.log('a');
+						categories.set('map', categories.get('map').toSpliced(i));
+					}}>{map}</button
+				>
+			{/each}
+		</div>
+
+		<div class="mt-4 flex-row justify-between">
 			<div class="basis-1/2 flex-col border-r-2 border-zinc-300/10 pr-2">
 				<div class="justify-center">left player</div>
-				{#each categories[0].array as player}
-					<button class="button">{player}</button>
-				{/each}
+				<div class="flex-wrap gap-2">
+					{#each categories.get('player') as player}
+						<button class="button">{player}</button>
+					{/each}
+				</div>
 				<div class="justify-center">flag</div>
-				<div>
+				<div class="flex-wrap gap-2">
+					{#each categories.get('flag') as flag}
+						<button class="button">
+							<span>{flag}</span>
+							<img
+								class="ml-1 flex h-6 self-center"
+								src="https://countryflagsapi.netlify.app/flag/{flag}.svg"
+								alt={flag}
+							/>
+						</button>
+					{/each}
+				</div>
+				<div class="mt-4">
 					<div>map pr:</div>
-					<input class="input" />
+					<input bind:value={sel_left_pr} class="input" />
 				</div>
 			</div>
 			<div class="basis-1/2 flex-col justify-items-center pl-2">
 				<div class="justify-center">right player</div>
-				{#each categories[0].array as player}
-					<button class="button">{player}</button>
-				{/each}
+				<div class="flex-wrap gap-2">
+					{#each categories.get('player') as player}
+						<button class="button">{player}</button>
+					{/each}
+				</div>
 				<div class="justify-center">flag</div>
-				<div>
+				<div class="flex-wrap gap-2">
+					{#each categories.get('flag') as flag}
+						<button class="button">
+							<span>{flag}</span>
+							<img
+								class="ml-1 flex h-6 self-center"
+								src="https://countryflagsapi.netlify.app/flag/{flag}.svg"
+								alt={flag}
+							/>
+						</button>
+					{/each}
+				</div>
+				<div class="mt-4">
 					<div>map pr:</div>
-					<input class="input" />
+					<input bind:value={sel_rght_pr} class="input" />
 				</div>
 			</div>
 		</div>
 
-		<div class="justify-center">score</div>
-		<div>map</div>
+		<div class="mt-4 justify-center">
+			<div class="w-full justify-center">
+				<button class="button size-8 justify-center rounded-r-none px-0">+</button>
+				<button class="button size-8 justify-center rounded-none bg-violet-300 px-0"
+					>{left_score}</button
+				>
+				<button class="button size-8 justify-center rounded-l-none px-0">-</button>
+			</div>
+			<div class="">score</div>
+			<div class="w-full justify-center">
+				<button class="button size-8 justify-center rounded-r-none px-0">+</button>
+				<button class="button size-8 justify-center rounded-none bg-violet-300 px-0"
+					>{rght_score}</button
+				>
+				<button class="button size-8 justify-center rounded-l-none px-0">-</button>
+			</div>
+		</div>
+
 		<div>stage</div>
+		<div class="flex-wrap gap-2">
+			{#each categories.get('stage') as stage}
+				<button class="button">{stage}</button>
+			{/each}
+		</div>
 	</div>
 </div>
 
@@ -142,7 +253,7 @@
 		}
 
 		.button {
-			@apply rounded-md border-b-2 border-violet-400 bg-violet-300 px-1 text-zinc-800;
+			@apply flex w-fit cursor-pointer rounded-md border-b-2 border-violet-400/60 bg-violet-300/60 px-2 text-zinc-800 transition-colors hover:border-violet-400 hover:bg-violet-300;
 		}
 	}
 </style>
