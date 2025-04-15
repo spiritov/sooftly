@@ -52,7 +52,6 @@ declare module '$env/static/private' {
 	export const INIT_CWD: string;
 	export const LANG: string;
 	export const LOCALAPPDATA: string;
-	export const LOCAL_GIT_DIRECTORY: string;
 	export const LOGONSERVER: string;
 	export const MANPATH: string;
 	export const MINGW_CHOST: string;
@@ -132,7 +131,6 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const WINDIR: string;
 	export const _: string;
-	export const __COMPAT_LAYER: string;
 }
 
 /**
@@ -190,7 +188,6 @@ declare module '$env/dynamic/private' {
 		INIT_CWD: string;
 		LANG: string;
 		LOCALAPPDATA: string;
-		LOCAL_GIT_DIRECTORY: string;
 		LOGONSERVER: string;
 		MANPATH: string;
 		MINGW_CHOST: string;
@@ -270,7 +267,6 @@ declare module '$env/dynamic/private' {
 		VSCODE_GIT_IPC_HANDLE: string;
 		WINDIR: string;
 		_: string;
-		__COMPAT_LAYER: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
