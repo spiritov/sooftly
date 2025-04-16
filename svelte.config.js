@@ -4,6 +4,7 @@ const config = {
   kit: {
     adapter: adapter(),
     paths: { base: process.argv.includes('dev') ? '' : '/jump-tourney-overlay' },
+    output: { bundleStrategy: 'inline' }
   }
 };
 
