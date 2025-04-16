@@ -104,7 +104,6 @@
 		localStorage.setItem('overlay_map', '');
 		localStorage.setItem('overlay_stage', '');
 		localStorage.setItem('font', 'mono');
-		localStorage.setItem('isTimer', false);
 	}
 </script>
 

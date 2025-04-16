@@ -1,17 +1,17 @@
 <script>
 	import { browser } from '$app/environment';
 
-	let left_pr = $state('1:00');
-	let rght_pr = $state('1:00');
+	let left_pr = $state('-');
+	let rght_pr = $state('-');
 	let max_score = $state(2);
-	let left_player = $state('john jurf');
-	let rght_player = $state('curved ramp');
+	let left_player = $state('');
+	let rght_player = $state('');
 	let left_score = $state(0);
-	let rght_score = $state(2);
-	let left_flag = $state('JP');
-	let rght_flag = $state('KR');
-	let map = $state('jump_jurf');
-	let stage = $state('grand finals');
+	let rght_score = $state(0);
+	let left_flag = $state('');
+	let rght_flag = $state('');
+	let map = $state('');
+	let stage = $state('');
 	let font = $state('mono');
 
 	if (browser) {
@@ -60,9 +60,6 @@
 
 <div class="font-{font} block">
 	<div class="relative h-24 w-full">
-		<div class="absolute h-24 w-full items-center justify-center text-6xl">
-			<span class="z-10">10:00</span>
-		</div>
 		<div
 			class="relative ml-auto h-full basis-1/2 flex-row-reverse gap-8 bg-gradient-to-l from-orange-300/50 from-15% to-black/10 to-45%"
 		>
@@ -82,7 +79,7 @@
 					></div>
 				{/each}
 			</div>
-			<div class="absolute left-0 gap-4">
+			<div class="absolute left-0">
 				{#if left_flag !== ''}
 					<img
 						class="flex h-24"
@@ -90,7 +87,7 @@
 						alt="flag"
 					/>
 				{/if}
-				<div class="h-24 items-center text-5xl">{left_player}</div>
+				<div class="ml-4 h-24 items-center text-5xl">{left_player}</div>
 			</div>
 		</div>
 
@@ -113,7 +110,7 @@
 					></div>
 				{/each}
 			</div>
-			<div class="absolute right-0 flex-row-reverse gap-4">
+			<div class="absolute right-0 flex-row-reverse">
 				{#if rght_flag !== ''}
 					<img
 						class="flex h-24"
@@ -121,7 +118,7 @@
 						alt="flag"
 					/>
 				{/if}
-				<div class="h-24 items-center text-5xl">{rght_player}</div>
+				<div class="mr-4 h-24 items-center text-5xl">{rght_player}</div>
 			</div>
 		</div>
 	</div>
