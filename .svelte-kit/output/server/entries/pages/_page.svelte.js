@@ -68,7 +68,7 @@ function _page($$payload, $$props) {
   const each_array_5 = ensure_array_like(categories.get("player"));
   const each_array_6 = ensure_array_like(categories.get("flag"));
   const each_array_7 = ensure_array_like(categories.get("stage"));
-  $$payload.out += `<div class="block size-full bg-zinc-800 svelte-64yon1"><div class="w-full justify-center svelte-64yon1"><div class="mt-8 w-2xl flex-col rounded-md bg-zinc-300/10 p-4 text-center text-lg svelte-64yon1"><div class="mb-8 justify-center text-violet-300 svelte-64yon1">tourney overlay helper</div> <!---->`;
+  $$payload.out += `<div class="block h-screen bg-zinc-800 svelte-64yon1"><div class="w-full justify-center svelte-64yon1"><div class="mt-8 w-2xl flex-col rounded-md bg-zinc-300/10 p-4 text-center text-lg svelte-64yon1"><div class="mb-8 justify-center text-violet-300 svelte-64yon1">tourney overlay helper</div> <!---->`;
   {
     $$payload.out += `<button class="flex w-96 cursor-pointer self-center">${escape_html(arrow)} toggle</button>`;
   }
