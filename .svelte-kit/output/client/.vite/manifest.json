@@ -1,0 +1,24 @@
+{
+  "node_modules/@sveltejs/kit/src/runtime/client/bundle.js": {
+    "file": "_app/immutable/bundle.BxRCBx04.js",
+    "name": "bundle",
+    "src": "node_modules/@sveltejs/kit/src/runtime/client/bundle.js",
+    "isEntry": true,
+    "assets": [
+      "_app/immutable/assets/UbuntuMono.BfptL12z.ttf",
+      "_app/immutable/assets/Outfit.BlL8FXaZ.ttf"
+    ]
+  },
+  "src/lib/fonts/Outfit.ttf": {
+    "file": "_app/immutable/assets/Outfit.BlL8FXaZ.ttf",
+    "src": "src/lib/fonts/Outfit.ttf"
+  },
+  "src/lib/fonts/UbuntuMono.ttf": {
+    "file": "_app/immutable/assets/UbuntuMono.BfptL12z.ttf",
+    "src": "src/lib/fonts/UbuntuMono.ttf"
+  },
+  "style.css": {
+    "file": "_app/immutable/assets/style.C1eOvN6v.css",
+    "src": "style.css"
+  }
+}
