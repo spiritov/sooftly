@@ -14,5 +14,6 @@ That's all, you should now be able to use the buttons and inputs on the custom b
 
 ## features
 
+- right click to remove single option buttons.
 - maps, players, flags, and stages are always saved (for the dock).
 - `localStorage` is used to communicate between the dock and source.
