@@ -19,7 +19,6 @@
 @layer components {
 	html {
 		font-family: theme(--font-mono);
-		background-color: theme(--color-zinc-800);
 		color: theme(--color-zinc-300);
 
 		@variant selection {
