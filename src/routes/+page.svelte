@@ -107,7 +107,7 @@
 	}
 </script>
 
-<div class="block bg-zinc-800">
+<div class="block size-full bg-zinc-800">
 	<div class="w-full justify-center">
 		<div class="mt-8 w-2xl flex-col rounded-md bg-zinc-300/10 p-4 text-center text-lg">
 			<div class="mb-8 justify-center text-violet-300">tourney overlay helper</div>
