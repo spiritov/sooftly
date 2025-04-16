@@ -45,6 +45,7 @@
 	let sel_left_flag = $state(-1);
 	let sel_rght_flag = $state(-1);
 	let sel_stage = $state(-1);
+	let sel_font = $state(0);
 
 	//derived from buttons, or manually assigned
 	let best_of = $derived(sel_best_of * 2 + 1);
@@ -58,6 +59,7 @@
 	let left_flag = $derived(categories.get('flag')[sel_left_flag]);
 	let rght_flag = $derived(categories.get('flag')[sel_rght_flag]);
 	let stage = $derived(categories.get('stage')[sel_stage]);
+	let font = $derived(sel_font === 0 ? 'mono' : 'outfit');
 
 	function toggleAdd() {
 		add = !add;
@@ -101,6 +103,8 @@
 		localStorage.setItem('rght_flag', '');
 		localStorage.setItem('overlay_map', '');
 		localStorage.setItem('overlay_stage', '');
+		localStorage.setItem('font', 'mono');
+		localStorage.setItem('isTimer', false);
 	}
 </script>
 
@@ -180,6 +184,23 @@
 						{/if}
 					</div>
 				{/each}
+				<div class="gap-2">
+					<span>font</span>
+					<button
+						class="button {sel_font === 0 ? 'bg-violet-300' : ''}"
+						onclick={() => {
+							sel_font = 0;
+							localStorage.setItem('font', 'mono');
+						}}>Ubuntu Mono</button
+					>
+					<button
+						class="font-outfit button {sel_font === 1 ? 'bg-violet-300' : ''}"
+						onclick={() => {
+							sel_font = 1;
+							localStorage.setItem('font', 'outfit');
+						}}>Outfit</button
+					>
+				</div>
 			</div>
 		{/if}
 

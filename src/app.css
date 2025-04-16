@@ -6,7 +6,13 @@
 	src: url('$lib/fonts/UbuntuMono.ttf');
 }
 
+@font-face {
+	font-family: Outfit;
+	font-style: normal;
+	src: url('$lib/fonts/Outfit.ttf');
+}
 @theme {
+	--font-outfit: 'Outfit';
 	--font-mono: 'UbuntuMono', 'mono';
 }
 
