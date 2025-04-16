@@ -2,6 +2,8 @@
 
 This repo includes the GitHub Pages site in its codebase, built with Svelte and `bundleStrategy: 'inline'` in `svelte.config.js`.
 It's created for use with tf2 rocket / sticky jump tournaments, but you're welcome to use it for other cases if you find it useful!
+![image](https://github.com/user-attachments/assets/98c934e0-ca7d-41eb-802c-1472e1a28a33)
+
 
 ## usage
 
