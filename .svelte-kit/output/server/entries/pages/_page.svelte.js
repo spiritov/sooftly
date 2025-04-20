@@ -56,6 +56,7 @@ function _page($$payload, $$props) {
   let left_flag = categories.get("flag")[sel_left_flag];
   let rght_flag = categories.get("flag")[sel_rght_flag];
   categories.get("stage")[sel_stage];
+  let use_pr = true;
   function removeItem(evt, cat, i) {
     evt.preventDefault();
     categories.set(cat, categories.get(cat).toSpliced(i, 1));
@@ -97,7 +98,7 @@ function _page($$payload, $$props) {
       }
       $$payload.out += `<!--]--></div>`;
     }
-    $$payload.out += `<!--]--> <div class="gap-2 svelte-64yon1"><span>font</span> <button${attr_class(`button ${stringify("bg-violet-300")}`, "svelte-64yon1")}>Ubuntu Mono</button> <button${attr_class(`font-outfit button ${stringify("")}`, "svelte-64yon1")}>Outfit</button></div></div>`;
+    $$payload.out += `<!--]--> <div class="gap-2 svelte-64yon1"><span>font</span> <button${attr_class(`button ${stringify("bg-violet-300")}`, "svelte-64yon1")}>Ubuntu Mono</button> <button${attr_class(`font-outfit button ${stringify("")}`, "svelte-64yon1")}>Outfit</button></div> <div class="svelte-64yon1"><span>use pr's</span> <input class="ml-2 flex size-4 self-center" type="checkbox"${attr("checked", use_pr, true)}></div></div>`;
   }
   $$payload.out += `<!--]--> <div class="relative mt-8 w-96 justify-center gap-2 self-center svelte-64yon1"><span class="absolute left-0">best of</span> <!--[-->`;
   for (let i = 0, $$length = each_array_1.length; i < $$length; i++) {
@@ -186,7 +187,12 @@ function _page($$payload, $$props) {
     }
     $$payload.out += `<!--]-->`;
   }
-  $$payload.out += `<!--]--></div> <div class="mt-4 svelte-64yon1"><div class="svelte-64yon1">map pr:</div> <input${attr("value", left_pr)} class="input svelte-64yon1"></div></div> <div class="basis-1/2 flex-col justify-items-center pl-2 svelte-64yon1"><div class="justify-center svelte-64yon1">right player</div> <div class="flex-wrap gap-2 svelte-64yon1"><!--[-->`;
+  $$payload.out += `<!--]--></div> `;
+  {
+    $$payload.out += "<!--[-->";
+    $$payload.out += `<div class="mt-4 svelte-64yon1"><div class="svelte-64yon1">map pr:</div> <input${attr("value", left_pr)} class="input svelte-64yon1"></div>`;
+  }
+  $$payload.out += `<!--]--></div> <div class="basis-1/2 flex-col justify-items-center pl-2 svelte-64yon1"><div class="justify-center svelte-64yon1">right player</div> <div class="flex-wrap gap-2 svelte-64yon1"><!--[-->`;
   for (let i = 0, $$length = each_array_5.length; i < $$length; i++) {
     let player = each_array_5[i];
     if (sel_rght_player === i) {
@@ -242,7 +248,12 @@ function _page($$payload, $$props) {
     }
     $$payload.out += `<!--]-->`;
   }
-  $$payload.out += `<!--]--></div> <div class="mt-4 svelte-64yon1"><div class="svelte-64yon1">map pr:</div> <input${attr("value", rght_pr)} class="input svelte-64yon1"></div></div></div> <div class="relative mt-4 justify-center svelte-64yon1"><div class="w-full justify-center svelte-64yon1"><button class="button size-8 justify-center rounded-r-none px-0 svelte-64yon1">+</button> <button class="button size-8 justify-center rounded-none bg-violet-300 px-0 svelte-64yon1">${escape_html(left_score)}</button> <button class="button size-8 justify-center rounded-l-none px-0 svelte-64yon1">-</button></div> <div class="absolute svelte-64yon1">score</div> <div class="w-full justify-center svelte-64yon1"><button class="button size-8 justify-center rounded-r-none px-0 svelte-64yon1">+</button> <button class="button size-8 justify-center rounded-none bg-violet-300 px-0 svelte-64yon1">${escape_html(rght_score)}</button> <button class="button size-8 justify-center rounded-l-none px-0 svelte-64yon1">-</button></div></div> <div class="svelte-64yon1">stage</div> <div class="flex-wrap gap-2 svelte-64yon1"><!--[-->`;
+  $$payload.out += `<!--]--></div> `;
+  {
+    $$payload.out += "<!--[-->";
+    $$payload.out += `<div class="mt-4 svelte-64yon1"><div class="svelte-64yon1">map pr:</div> <input${attr("value", rght_pr)} class="input svelte-64yon1"></div>`;
+  }
+  $$payload.out += `<!--]--></div></div> <div class="relative mt-4 justify-center svelte-64yon1"><div class="w-full justify-center svelte-64yon1"><button class="button size-8 justify-center rounded-r-none px-0 svelte-64yon1">+</button> <button class="button size-8 justify-center rounded-none bg-violet-300 px-0 svelte-64yon1">${escape_html(left_score)}</button> <button class="button size-8 justify-center rounded-l-none px-0 svelte-64yon1">-</button></div> <div class="absolute svelte-64yon1">score</div> <div class="w-full justify-center svelte-64yon1"><button class="button size-8 justify-center rounded-r-none px-0 svelte-64yon1">+</button> <button class="button size-8 justify-center rounded-none bg-violet-300 px-0 svelte-64yon1">${escape_html(rght_score)}</button> <button class="button size-8 justify-center rounded-l-none px-0 svelte-64yon1">-</button></div></div> <div class="svelte-64yon1">stage</div> <div class="flex-wrap gap-2 svelte-64yon1"><!--[-->`;
   for (let i = 0, $$length = each_array_7.length; i < $$length; i++) {
     let stage = each_array_7[i];
     if (sel_stage === i) {
