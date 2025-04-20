@@ -13,6 +13,7 @@
 	let map = $state('');
 	let stage = $state('');
 	let font = $state('mono');
+	let use_pr = $state(true);
 
 	if (browser) {
 		window.addEventListener('storage', (storage) => {
@@ -53,6 +54,9 @@
 				case 'font':
 					font = localStorage.getItem('font');
 					return;
+				case 'use_pr':
+					use_pr = JSON.parse(localStorage.getItem('use_pr'));
+					return;
 			}
 		});
 	}
@@ -63,9 +67,11 @@
 		<div
 			class="relative ml-auto h-full basis-1/2 flex-row-reverse gap-8 bg-gradient-to-l from-orange-300/50 from-15% to-black/10 to-45%"
 		>
-			<div class="mr-36 w-24 flex-col items-center justify-center">
-				<div class="text-3xl">PR</div>
-				<div class="text-4xl">{left_pr}</div>
+			<div class="{use_pr ? 'mr-36' : 'mr-18'} w-24 flex-col items-center justify-center">
+				{#if use_pr}
+					<div class="text-3xl">PR</div>
+					<div class="text-4xl">{left_pr}</div>
+				{/if}
 			</div>
 			<div class="flex-row-reverse items-center gap-2">
 				{#each { length: left_score }}
@@ -94,9 +100,11 @@
 		<div
 			class="relative mr-auto h-full basis-1/2 gap-8 bg-gradient-to-r from-orange-300/50 from-15% to-black/10 to-45%"
 		>
-			<div class="ml-36 w-24 flex-col items-center justify-center">
-				<div class="text-3xl">PR</div>
-				<div class="text-4xl">{rght_pr}</div>
+			<div class="{use_pr ? 'ml-36' : 'ml-18'} w-24 flex-col items-center justify-center">
+				{#if use_pr}
+					<div class="text-3xl">PR</div>
+					<div class="text-4xl">{rght_pr}</div>
+				{/if}
 			</div>
 			<div class="flex-row items-center gap-2">
 				{#each { length: rght_score }}

@@ -60,6 +60,12 @@
 	let rght_flag = $derived(categories.get('flag')[sel_rght_flag]);
 	let stage = $derived(categories.get('stage')[sel_stage]);
 	let font = $derived(sel_font === 0 ? 'mono' : 'outfit');
+	let use_pr = $state(true);
+
+	//i forgot about $effect :)
+	$effect(() => {
+		localStorage.setItem('use_pr', use_pr);
+	});
 
 	function toggleAdd() {
 		add = !add;
@@ -104,6 +110,7 @@
 		localStorage.setItem('overlay_map', '');
 		localStorage.setItem('overlay_stage', '');
 		localStorage.setItem('font', 'mono');
+		localStorage.setItem('use_pr', true);
 	}
 </script>
 
@@ -200,6 +207,10 @@
 								localStorage.setItem('font', 'outfit');
 							}}>Outfit</button
 						>
+					</div>
+					<div>
+						<span>use pr's</span>
+						<input class="ml-2 flex size-4 self-center" type="checkbox" bind:checked={use_pr} />
 					</div>
 				</div>
 			{/if}
@@ -300,15 +311,16 @@
 							{/if}
 						{/each}
 					</div>
-
-					<div class="mt-4">
-						<div>map pr:</div>
-						<input
-							bind:value={left_pr}
-							class="input"
-							oninput={(e) => localStorage.setItem('left_pr', e.target.value)}
-						/>
-					</div>
+					{#if use_pr}
+						<div transition:slide class="mt-4">
+							<div>map pr:</div>
+							<input
+								bind:value={left_pr}
+								class="input"
+								oninput={(e) => localStorage.setItem('left_pr', e.target.value)}
+							/>
+						</div>
+					{/if}
 				</div>
 
 				<div class="basis-1/2 flex-col justify-items-center pl-2">
@@ -366,14 +378,16 @@
 						{/each}
 					</div>
 
-					<div class="mt-4">
-						<div>map pr:</div>
-						<input
-							bind:value={rght_pr}
-							class="input"
-							oninput={(e) => localStorage.setItem('rght_pr', e.target.value)}
-						/>
-					</div>
+					{#if use_pr}
+						<div transition:slide class="mt-4">
+							<div>map pr:</div>
+							<input
+								bind:value={rght_pr}
+								class="input"
+								oninput={(e) => localStorage.setItem('rght_pr', e.target.value)}
+							/>
+						</div>
+					{/if}
 				</div>
 			</div>
 
