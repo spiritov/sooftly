@@ -1,0 +1,3 @@
+font-ubuntumono
+font-lexend
+font-montserrat

@@ -1,4 +1,2 @@
-.svelte-kit/** linguist-detectable=false
-.svelte-kit/** linguist-documentation=false
-build/** linguist-detectable=false
-build/** linguist-documentation=false
+# Auto detect text files and perform LF normalization
+* text=auto

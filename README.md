@@ -1,19 +1,38 @@
-## tourney overlay helper
+# sv
 
-This repo includes the GitHub Pages site in its codebase, built with Svelte and `bundleStrategy: 'inline'` in `svelte.config.js`.
-It's created for use with tf2 rocket / sticky jump tournaments, but you're welcome to use it for other cases if you find it useful!
-![image](https://github.com/user-attachments/assets/98c934e0-ca7d-41eb-802c-1472e1a28a33)
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
+## Creating a project
 
-## usage
+If you're seeing this, you've probably already done this step. Congrats!
 
-1. Add [https://spiritov.github.io/jump-tourney-overlay/build/overlay.html](https://spiritov.github.io/jump-tourney-overlay/build/overlay.html) as a browser source in your OBS Scene. (Sources -> Add -> Browser -> Paste URL)
-2. Add [https://spiritov.github.io/jump-tourney-overlay/build/index.html](https://spiritov.github.io/jump-tourney-overlay/build/index.html) as a custom browser dock in your OBS window. (Docks -> Custom Browser Docks -> Paste URL)
+```bash
+# create a new project in the current directory
+npx sv create
 
-That's all, you should now be able to use the buttons and inputs on the custom browser dock's page to interact with the overlay. Make sure to add a background source under it.
+# create a new project in my-app
+npx sv create my-app
+```
 
-## features
+## Developing
 
-- right click to remove single option buttons.
-- maps, players, flags, and stages are always saved (for the dock).
-- `localStorage` is used to communicate between the dock and source.
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.

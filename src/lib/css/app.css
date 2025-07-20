@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+@source './safelist.txt';
+
+/* import fonts */
+@font-face {
+  font-family: 'ubuntumono';
+  src: url('../fonts/UbuntuMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'lexend';
+  src: url('../fonts/Lexend-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'montserrat';
+  src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
+}
+
+/* tailwind theme */
+@theme {
+  --font-ubuntumono: 'ubuntumono', 'ui-sans-serif', 'system-ui', 'sans-serif';
+  --font-lexend: 'lexend', 'ui-sans-serif', 'system-ui', 'sans-serif';
+  --font-montserrat: 'montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif';
+  --color-*: initial;
+  --color-darklavender: #b087dd;
+  --color-lavender: #cea5fb;
+  --color-salmon: #fa7970;
+  --color-palewhite: #ecf2f8;
+  --color-black: #212326;
+  --color-paleblack: #303235;
+  --color-grey: #3f4144;
+  --color-palegrey: #4e5053;
+}
+
+/* global styling */
+@layer base {
+  html {
+    font-family: theme(--font-ubuntumono);
+    background-color: theme(--color-black);
+    color: theme(--color-palewhite);
+  }
+
+  ::selection {
+    color: theme(--color-black);
+    background-color: theme(--color-lavender);
+  }
+}
