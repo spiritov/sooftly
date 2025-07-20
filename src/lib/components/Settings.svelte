@@ -1,6 +1,7 @@
 <script>
   import { settings } from '$lib/stores/settings.svelte';
   import ButtonOption from './ButtonOption.svelte';
+  import CheckboxOption from './CheckboxOption.svelte';
 
   const fonts = ['UbuntuMono', 'Lexend', 'Montserrat'];
 
@@ -32,21 +33,8 @@
         />
       {/each}
     </div>
-    <div class="flex flex-row gap-1">
-      <input
-        class="checked:bg-lavender border-palewhite inset-ring-paleblack size-6 appearance-none self-center rounded-sm border-2 inset-ring-2 select-none"
-        type="checkbox"
-        checked={settings.enablePR}
-      />
-      <span>use PRs</span>
-    </div>
-    <div class="flex flex-row gap-1">
-      <input
-        class="checked:bg-lavender border-palewhite inset-ring-paleblack size-6 appearance-none self-center rounded-sm border-2 inset-ring-2 select-none"
-        type="checkbox"
-        checked={settings.enableWebSocket}
-      />
-      <span>use WebSocket timer</span>
-    </div>
+    <CheckboxOption option={settings.enablePR} description={'use PRs'} />
+    <CheckboxOption option={settings.enableSinglePOV} description={'use single POV'} />
+    <CheckboxOption option={settings.enableWebSocket} description={'use WebSocket timer'} />
   </div>
 {/if}

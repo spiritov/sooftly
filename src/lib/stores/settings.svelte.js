@@ -23,5 +23,6 @@ export const categories = new SvelteMap([
 export const settings = $state({
   font: 'UbuntuMono',
   enablePR: true,
+  enableSinglePOV: false,
   enableWebSocket: false
 });
