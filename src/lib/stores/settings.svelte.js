@@ -1,7 +1,7 @@
 import { SvelteMap } from 'svelte/reactivity';
 
 export const categories = new SvelteMap([
-  ['player', []],
+  ['name', []],
   ['flag', []],
   ['map', []],
   [

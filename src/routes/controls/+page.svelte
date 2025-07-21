@@ -1,5 +1,6 @@
 <script>
   import Inputs from '$lib/components/Inputs.svelte';
+  import PlayerSelect from '$lib/components/PlayerSelect.svelte';
   import Settings from '$lib/components/Settings.svelte';
 </script>
 
@@ -10,6 +11,12 @@
     {@render separator('w-96')}
     <Settings />
     {@render separator('w-96')}
+    <div class="flex w-full">
+      <PlayerSelect side={'left'} />
+      {@render separator('rotate-90 w-fit')}
+      <PlayerSelect side={'right'} />
+    </div>
+    {@render separator('w-full')}
   </div>
 </div>
 

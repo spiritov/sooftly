@@ -4,19 +4,32 @@
 
   let display = $state(true);
   let arrow = $derived(display ? '˅' : '>');
+
+  function inputKeypress(e, category) {
+    const inputValue = e.target.value;
+    if (e.key === 'Enter' && inputValue.length > 0) {
+      const values = categories.get(category);
+
+      if (category === 'flag' && inputValue.length === 2) {
+        categories.set(category, values.concat([inputValue.toUpperCase()]));
+      } else if (category === 'name') {
+        categories.set(category, values.concat([[inputValue]]));
+      }
+    }
+  }
 </script>
 
 {#key display}
   <button
     onclick={() => (display = !display)}
-    class="flex w-96 cursor-pointer self-center text-left">{arrow} options</button
+    class="text-lavender flex w-96 cursor-pointer self-center text-left">{arrow} options</button
   >
 {/key}
 
 {#if display}
   <div class="flex w-96 flex-col gap-0.5 self-center">
     {#each categories as [category, _]}
-      <InputCategory {category} />
+      <InputCategory {category} onkeypress={(e) => inputKeypress(e, category)} />
     {/each}
   </div>
 {/if}

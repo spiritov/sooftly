@@ -17,17 +17,19 @@
 {#key display}
   <button
     onclick={() => (display = !display)}
-    class="flex w-96 cursor-pointer self-center text-left">{arrow} overlay settings</button
+    class="text-lavender flex w-96 cursor-pointer self-center text-left"
+    >{arrow} overlay settings</button
   >
 {/key}
 
 {#if display}
   <div class="flex w-96 flex-col gap-0.5 self-center">
+    <span class="text-left">font</span>
     <div class="flex gap-1">
       {#each fonts as name, index}
         <ButtonOption
           {name}
-          removable={false}
+          isFont={true}
           selected={index === fontIndex}
           onclick={() => fontButtonClick(index)}
         />

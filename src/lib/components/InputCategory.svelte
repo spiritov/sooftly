@@ -1,8 +1,7 @@
 <script>
-  import { categories } from '$lib/stores/settings.svelte';
   import InputRemoveButton from './InputRemoveButton.svelte';
 
-  let { category } = $props();
+  let { category, onkeypress = null } = $props();
   let isFlag = $derived(category === 'flag');
 </script>
 
@@ -11,6 +10,7 @@
     <a
       class="hover:text-lavender absolute left-0 flex gap-1"
       href="https://countryflagsapi.netlify.app/country-list"
+      target="_blank"
     >
       <span>add {category}</span>
       <span class="self-center">{@render icon_link()}</span>
@@ -19,9 +19,10 @@
     <span class="absolute left-0 flex">add {category}</span>
   {/if}
   <input
-    placeholder={isFlag ? 'alpha-2 code' : ''}
-    type="text"
     class="bg-grey border-b-palegrey focus:border-b-lavender hover:bg-palegrey h-8 rounded-md border-b-2 px-1 ring-0 outline-none"
+    type="text"
+    placeholder={isFlag ? 'alpha-2 code' : ''}
+    {onkeypress}
   />
   <InputRemoveButton {category} />
 </div>
