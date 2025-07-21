@@ -13,10 +13,8 @@
     {@render separator('w-96')}
     <div class="flex w-full">
       <PlayerSelect side={'left'} />
-      {@render separator('rotate-90 w-fit')}
       <PlayerSelect side={'right'} />
     </div>
-    {@render separator('w-full')}
   </div>
 </div>
 
