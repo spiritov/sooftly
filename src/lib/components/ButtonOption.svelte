@@ -1,11 +1,20 @@
 <script>
-  let { name = '', withFlag = false, isFont = false, selected = false, onclick = null } = $props();
+  let {
+    name,
+    withFlag = false,
+    isFont = false,
+    isBestOf = false,
+    selected = false,
+    removable = false,
+    onclick = null
+  } = $props();
 </script>
 
 <button
-  class="{isFont
-    ? `font-${name.toLowerCase()}`
-    : ''} bg-lavender text-paleblack hover:bg-lavender border-darklavender flex w-fit rounded-md border-b-2 px-2 hover:cursor-pointer {selected
+  class="{isFont ? `font-${name.toLowerCase()}` : ''}
+    {isBestOf
+    ? 'px-3'
+    : 'px-2'} bg-lavender text-paleblack hover:bg-lavender border-darklavender flex w-fit rounded-md border-b-2 hover:cursor-pointer {selected
     ? 'brightness-100'
     : 'brightness-50'}"
   {onclick}
