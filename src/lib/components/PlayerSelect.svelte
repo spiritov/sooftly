@@ -1,6 +1,6 @@
 <script>
   import { categories } from '$lib/stores/settings.svelte';
-  import ButtonOption from './ButtonOption.svelte';
+  import ButtonOption from './selectables/ButtonOption.svelte';
   import InputPR from './InputPR.svelte';
 
   let { side } = $props();

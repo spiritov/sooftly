@@ -1,7 +1,8 @@
 <script>
   import { settings } from '$lib/stores/settings.svelte';
-  import ButtonOption from './ButtonOption.svelte';
-  import CheckboxOption from './CheckboxOption.svelte';
+
+  import ButtonOption from './selectables/ButtonOption.svelte';
+  import CheckboxOption from './selectables/CheckboxOption.svelte';
 
   const fonts = ['UbuntuMono', 'Lexend', 'Montserrat'];
 
@@ -11,6 +12,7 @@
 
   function fontButtonClick(index) {
     fontIndex = index;
+    settings.font = fonts[index];
   }
 </script>
 
@@ -35,8 +37,8 @@
         />
       {/each}
     </div>
-    <CheckboxOption option={settings.enablePR} description={'use PRs'} />
-    <CheckboxOption option={settings.enableSinglePOV} description={'use single POV'} />
-    <CheckboxOption option={settings.enableWebSocket} description={'use WebSocket timer'} />
+    <CheckboxOption description={'use PRs'} bind:checked={settings.usePR} />
+    <CheckboxOption description={'use single POV'} bind:checked={settings.useSinglePOV} />
+    <CheckboxOption description={'use WebSocket timer'} bind:checked={settings.useWebSocket} />
   </div>
 {/if}

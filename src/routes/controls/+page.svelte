@@ -1,8 +1,16 @@
 <script>
-  import BestOf from '$lib/components/BestOf.svelte';
+  import BestOf from '$lib/components/selectables/BestOf.svelte';
   import Inputs from '$lib/components/Inputs.svelte';
   import PlayerSelect from '$lib/components/PlayerSelect.svelte';
   import Settings from '$lib/components/Settings.svelte';
+
+  import { settings } from '$lib/stores/settings.svelte';
+
+  $effect(() => {
+    for (const [key, value] of Object.entries(settings)) {
+      localStorage.setItem(key, value);
+    }
+  });
 </script>
 
 <div class="flex h-full w-full justify-center">

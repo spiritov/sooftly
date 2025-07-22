@@ -22,7 +22,17 @@ export const categories = new SvelteMap([
 
 export const settings = $state({
   font: 'UbuntuMono',
-  enablePR: true,
-  enableSinglePOV: false,
-  enableWebSocket: false
+  usePR: true,
+  useSinglePOV: false,
+  useWebSocket: false,
+  bestOf: 3,
+  leftName: '',
+  rightName: '',
+  leftFlag: '',
+  rightFlag: '',
+  leftPR: '',
+  rightPR: '',
+  leftScore: '',
+  rightScore: '',
+  stage: ''
 });

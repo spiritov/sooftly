@@ -1,10 +1,12 @@
 <script>
   import ButtonOption from './ButtonOption.svelte';
+  import { settings } from '$lib/stores/settings.svelte';
 
   let bestOfIndex = $state(1);
 
   function setIndex(index) {
     bestOfIndex = index;
+    settings.bestOf = index * 2 + 1;
   }
 </script>
 
