@@ -1,23 +1,22 @@
 import { SvelteMap } from 'svelte/reactivity';
 
+export const defaultStages = [
+  'Round 1',
+  'Round 2',
+  'Quarterfinals',
+  'Semifinals',
+  'Finals',
+  'Grand Finals',
+  "Loser's Quarters",
+  "Loser's Semis",
+  "Loser's Finals"
+];
+
 export const categories = new SvelteMap([
   ['name', []],
   ['flag', []],
   ['map', []],
-  [
-    'stage',
-    [
-      'Round 1',
-      'Round 2',
-      'Quarterfinals',
-      'Semifinals',
-      'Finals',
-      'Grand Finals',
-      "Loser's Quarters",
-      "Loser's Semis",
-      "Loser's Finals"
-    ]
-  ]
+  ['stage', defaultStages]
 ]);
 
 export const settings = $state({
@@ -25,6 +24,7 @@ export const settings = $state({
   usePR: true,
   useSinglePOV: false,
   useWebSocket: false,
+  hueRotate: 0,
   bestOf: 3,
   leftName: '',
   rightName: '',

@@ -16,13 +16,15 @@
 
 <div class="flex h-full w-full justify-center">
   <div
-    class="bg-paleblack mt-8 flex w-2xl flex-col items-center gap-1 rounded-md p-4 text-center text-lg"
+    class="bg-paleblack mt-8 flex w-2xl flex-col items-center gap-2 rounded-md p-4 text-center text-lg"
   >
     <span class="text-lavender mb-4">tourney overlay</span>
-    <Inputs />
-    {@render separator('w-96')}
-    <Settings />
-    {@render separator('w-96')}
+    <div class="flex flex-col">
+      <Inputs />
+      {@render separator('w-96')}
+      <Settings />
+      {@render separator('w-96')}
+    </div>
 
     <BestOf />
 

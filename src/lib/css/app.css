@@ -31,6 +31,8 @@
   --color-paleblack: #303235;
   --color-grey: #3f4144;
   --color-palegrey: #4e5053;
+
+  --color-overlay-orange: oklch(0.837 0.128 66.29);
 }
 
 /* global styling */

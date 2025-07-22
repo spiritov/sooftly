@@ -1,4 +1,6 @@
 <script>
+  import { fade } from 'svelte/transition';
+
   let {
     name,
     withFlag = false,
@@ -12,14 +14,13 @@
 
 <button
   class="{isFont ? `font-${name.toLowerCase()}` : ''}
-    {isBestOf
-    ? 'px-3'
-    : 'px-2'} bg-lavender text-paleblack hover:bg-lavender border-darklavender flex w-fit rounded-md border-b-2 hover:cursor-pointer {selected
+    {isBestOf ? 'px-3' : 'px-2'}
+    {selected
     ? 'brightness-100'
-    : 'brightness-50'}
-    {selected ? '' : 'hover:brightness-100'}"
+    : 'brightness-50 hover:brightness-100'} bg-lavender text-paleblack hover:bg-lavender border-darklavender flex w-fit rounded-md border-b-2 transition-all hover:cursor-pointer"
   {onclick}
   {oncontextmenu}
+  in:fade
   >{name}
   {#if withFlag}{@render flag(name)}{/if}</button
 >

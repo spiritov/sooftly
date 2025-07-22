@@ -32,6 +32,14 @@
     e.preventDefault();
     categories.set(category, values.toSpliced(index, 1));
   }
+
+  $effect(() => {
+    if (side === 'left') {
+      settings.leftPR = pr;
+    } else {
+      settings.rightPR = pr;
+    }
+  });
 </script>
 
 <div class="flex w-full flex-col gap-1 {useBorder ? 'border-palegrey border-r-2' : ''}">
@@ -61,6 +69,6 @@
   </div>
 
   {#if settings.usePR}
-    <InputPR onkeypress={(e) => (pr = e.target.value)} />
+    <InputPR bind:value={pr} />
   {/if}
 </div>
