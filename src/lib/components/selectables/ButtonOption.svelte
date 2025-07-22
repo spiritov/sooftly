@@ -5,8 +5,8 @@
     isFont = false,
     isBestOf = false,
     selected = false,
-    removable = false,
-    onclick = null
+    onclick = null,
+    oncontextmenu = null
   } = $props();
 </script>
 
@@ -16,8 +16,10 @@
     ? 'px-3'
     : 'px-2'} bg-lavender text-paleblack hover:bg-lavender border-darklavender flex w-fit rounded-md border-b-2 hover:cursor-pointer {selected
     ? 'brightness-100'
-    : 'brightness-50'}"
+    : 'brightness-50'}
+    {selected ? '' : 'hover:brightness-100'}"
   {onclick}
+  {oncontextmenu}
   >{name}
   {#if withFlag}{@render flag(name)}{/if}</button
 >

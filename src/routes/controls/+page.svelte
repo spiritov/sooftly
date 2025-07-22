@@ -5,6 +5,7 @@
   import Settings from '$lib/components/Settings.svelte';
 
   import { settings } from '$lib/stores/settings.svelte';
+  import StageSelect from '$lib/components/StageSelect.svelte';
 
   $effect(() => {
     for (const [key, value] of Object.entries(settings)) {
@@ -29,6 +30,8 @@
       <PlayerSelect side={'left'} />
       <PlayerSelect side={'right'} />
     </div>
+
+    <StageSelect />
   </div>
 </div>
 
