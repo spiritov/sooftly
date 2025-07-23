@@ -39,6 +39,7 @@
       {/each}
     </div>
     <RangeOption description={'hue'} bind:value={settings.hueRotate} />
+    <CheckboxOption description={'use team colors'} bind:checked={settings.useTeamColors} />
     <CheckboxOption description={'use PRs'} bind:checked={settings.usePR} />
     <CheckboxOption description={'use single POV'} bind:checked={settings.useSinglePOV} />
     <CheckboxOption description={'use WebSocket timer'} bind:checked={settings.useWebSocket} />

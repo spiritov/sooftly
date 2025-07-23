@@ -5,24 +5,15 @@
 
   let { side } = $props();
   let useBorder = $derived(side === 'left');
-  let playerIndex = $state(-1);
+  let nameIndex = $state(-1);
   let flagIndex = $state(-1);
-  let pr = $state('');
 
   function setIndex(category, index) {
-    if (category === 'name') {
-      playerIndex = index;
-      if (side === 'left') {
-        settings.leftName = categories.get('name')[index];
-      } else {
-        settings.rightName = categories.get('name')[index];
-      }
+    const key = side + category;
+    settings[key] = categories.get(category.toLowerCase())[index];
+    if (category === 'Name') {
+      nameIndex = index;
     } else {
-      if (side === 'left') {
-        settings.leftFlag = categories.get('name')[index];
-      } else {
-        settings.rightFlag = categories.get('name')[index];
-      }
       flagIndex = index;
     }
   }
@@ -32,14 +23,6 @@
     e.preventDefault();
     categories.set(category, values.toSpliced(index, 1));
   }
-
-  $effect(() => {
-    if (side === 'left') {
-      settings.leftPR = pr;
-    } else {
-      settings.rightPR = pr;
-    }
-  });
 </script>
 
 <div class="flex w-full flex-col gap-1 {useBorder ? 'border-palegrey border-r-2' : ''}">
@@ -48,8 +31,8 @@
     {#each categories.get('name') as name, index}
       <ButtonOption
         {name}
-        selected={index === playerIndex}
-        onclick={() => setIndex('name', index)}
+        selected={index === nameIndex}
+        onclick={() => setIndex('Name', index)}
         oncontextmenu={(e) => removeOption(e, 'name', index)}
       />
     {/each}
@@ -62,13 +45,13 @@
         name={flag}
         withFlag={true}
         selected={index === flagIndex}
-        onclick={() => setIndex('flag', index)}
+        onclick={() => setIndex('Flag', index)}
         oncontextmenu={(e) => removeOption(e, 'flag', index)}
       />
     {/each}
   </div>
 
   {#if settings.usePR}
-    <InputPR bind:value={pr} />
+    <InputPR bind:value={settings[side + 'PR']} />
   {/if}
 </div>

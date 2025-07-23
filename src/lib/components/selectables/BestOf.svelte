@@ -2,10 +2,7 @@
   import ButtonOption from './ButtonOption.svelte';
   import { settings } from '$lib/stores/settings.svelte';
 
-  let bestOfIndex = $state(1);
-
   function setIndex(index) {
-    bestOfIndex = index;
     settings.bestOf = index * 2 + 1;
   }
 </script>
@@ -16,7 +13,7 @@
     <ButtonOption
       name={index * 2 + 1}
       isBestOf={true}
-      selected={bestOfIndex === index}
+      selected={(settings.bestOf - 1) / 2 === index}
       onclick={() => setIndex(index)}
     />
   {/each}

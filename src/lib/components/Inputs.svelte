@@ -14,7 +14,7 @@
       if (category === 'flag' && inputValue.length === 2) {
         categories.set(category, values.concat([inputValue.toUpperCase()]));
         e.target.value = '';
-      } else if (category === 'name') {
+      } else {
         categories.set(category, values.concat([[inputValue]]));
         e.target.value = '';
       }

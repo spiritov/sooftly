@@ -4,8 +4,30 @@
   import PlayerSelect from '$lib/components/PlayerSelect.svelte';
   import Settings from '$lib/components/Settings.svelte';
 
-  import { settings } from '$lib/stores/settings.svelte';
+  import { settings, categories } from '$lib/stores/settings.svelte';
   import StageSelect from '$lib/components/StageSelect.svelte';
+  import MapSelect from '$lib/components/MapSelect.svelte';
+  import { mount, onMount } from 'svelte';
+
+  let mounted = $state(false);
+
+  onMount(() => {
+    for (const [key, _] of categories) {
+      const savedValues = localStorage.getItem(`saved_${key}s`);
+      if (savedValues) {
+        categories.set(key, JSON.parse(savedValues));
+      }
+    }
+    mounted = true;
+  });
+
+  $effect(() => {
+    if (mounted) {
+      for (const [key, values] of categories) {
+        localStorage.setItem(`saved_${key}s`, JSON.stringify(values));
+      }
+    }
+  });
 
   $effect(() => {
     for (const [key, value] of Object.entries(settings)) {
@@ -33,6 +55,7 @@
       <PlayerSelect side={'right'} />
     </div>
 
+    <MapSelect />
     <StageSelect />
   </div>
 </div>
