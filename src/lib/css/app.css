@@ -43,6 +43,9 @@
     color: theme(--color-palewhite);
   }
 
+  input[type='text'] {
+    @apply bg-grey border-b-palegrey focus:border-b-lavender hover:bg-palegrey h-8 rounded-md border-b-2 px-1 ring-0 transition-all outline-none;
+  }
   ::selection {
     color: theme(--color-black);
     background-color: theme(--color-lavender);

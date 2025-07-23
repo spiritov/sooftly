@@ -1,8 +1,10 @@
 <script>
+  import { slide } from 'svelte/transition';
+
   let { description, value = $bindable() } = $props();
 </script>
 
-<div class="flex flex-col">
+<div transition:slide={{ duration: 250 }} class="flex flex-col">
   <span class="w-full text-left">hue rotation</span>
   <div class="flex items-center gap-1">
     <div

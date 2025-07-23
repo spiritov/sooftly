@@ -25,7 +25,7 @@
   }
 </script>
 
-<div class="flex w-full flex-col gap-1 {useBorder ? 'border-palegrey border-r-2' : ''}">
+<div class="flex w-full flex-col gap-2 {useBorder ? 'border-palegrey border-r-2' : ''}">
   <span>{side} name</span>
   <div class="flex flex-wrap gap-1 px-2">
     {#each categories.get('name') as name, index}

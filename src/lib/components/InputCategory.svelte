@@ -18,12 +18,7 @@
   {:else}
     <span class="absolute left-0 flex">add {category}</span>
   {/if}
-  <input
-    class="bg-grey border-b-palegrey focus:border-b-lavender hover:bg-palegrey h-8 rounded-md border-b-2 px-1 ring-0 transition-all outline-none"
-    type="text"
-    placeholder={isFlag ? 'alpha-2 code' : ''}
-    {onkeypress}
-  />
+  <input type="text" placeholder={isFlag ? 'alpha-2 code' : ''} {onkeypress} />
   <InputRemoveButton {category} />
 </div>
 
