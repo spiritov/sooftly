@@ -6,6 +6,7 @@ export const defaultSettings = {
   useTeamColors: false,
   useSinglePOV: false,
   useWebSocket: false,
+  useWebSocketToken: '',
   hueRotate: 0,
   bestOf: 3,
   leftName: '',
