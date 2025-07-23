@@ -1,6 +1,6 @@
 <script>
   import { categories } from '$lib/stores/settings.svelte';
-  import InputCategory from './InputCategory.svelte';
+  import InputCategory from './inputs/InputCategory.svelte';
   import { slide } from 'svelte/transition';
 
   let display = $state(true);

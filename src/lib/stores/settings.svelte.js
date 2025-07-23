@@ -9,14 +9,15 @@ export const defaultSettings = {
   useWebSocketToken: '',
   hueRotate: 0,
   bestOf: 3,
+  maxScore: 2,
   leftName: '',
   rightName: '',
   leftFlag: '',
   rightFlag: '',
   leftPR: '',
   rightPR: '',
-  leftScore: '',
-  rightScore: '',
+  leftScore: 0,
+  rightScore: 0,
   stage: ''
 };
 
@@ -45,15 +46,17 @@ export const settings = $state({
   useTeamColors: false,
   useSinglePOV: false,
   useWebSocket: false,
+  useWebSocketToken: '',
   hueRotate: 0,
   bestOf: 3,
+  maxScore: 2,
   leftName: '',
   rightName: '',
   leftFlag: '',
   rightFlag: '',
   leftPR: '',
   rightPR: '',
-  leftScore: '',
-  rightScore: '',
+  leftScore: 0,
+  rightScore: 0,
   stage: ''
 });

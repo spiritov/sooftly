@@ -1,9 +1,10 @@
 <script>
-  import ButtonOption from './ButtonOption.svelte';
+  import ButtonOption from './selectables/ButtonOption.svelte';
   import { settings } from '$lib/stores/settings.svelte';
 
   function setIndex(index) {
     settings.bestOf = index * 2 + 1;
+    settings.maxScore = index + 1;
   }
 </script>
 

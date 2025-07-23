@@ -1,7 +1,8 @@
 <script>
   import { categories, settings } from '$lib/stores/settings.svelte';
   import ButtonOption from './selectables/ButtonOption.svelte';
-  import InputPR from './InputPR.svelte';
+  import InputPR from './inputs/InputPR.svelte';
+  import Score from './selectables/Score.svelte';
 
   let { side } = $props();
   let useBorder = $derived(side === 'left');
@@ -54,4 +55,8 @@
   {#if settings.usePR}
     <InputPR bind:value={settings[side + 'PR']} />
   {/if}
+
+  <div class="flex w-full justify-center">
+    <Score {side} />
+  </div>
 </div>

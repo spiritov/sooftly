@@ -1,12 +1,12 @@
 <script>
-  import BestOf from '$lib/components/selectables/BestOf.svelte';
-  import Inputs from '$lib/components/Inputs.svelte';
-  import PlayerSelect from '$lib/components/PlayerSelect.svelte';
-  import Settings from '$lib/components/Settings.svelte';
+  import BestOf from '$lib/components/controls/BestOf.svelte';
+  import Inputs from '$lib/components/controls/Inputs.svelte';
+  import PlayerSelect from '$lib/components/controls/PlayerSelect.svelte';
+  import Settings from '$lib/components/controls/Settings.svelte';
 
   import { settings, categories } from '$lib/stores/settings.svelte';
-  import StageSelect from '$lib/components/StageSelect.svelte';
-  import MapSelect from '$lib/components/MapSelect.svelte';
+  import StageSelect from '$lib/components/controls/StageSelect.svelte';
+  import MapSelect from '$lib/components/controls/MapSelect.svelte';
   import { mount, onMount } from 'svelte';
 
   let mounted = $state(false);
@@ -38,9 +38,14 @@
 
 <div class="flex h-full w-full justify-center">
   <div
-    class="bg-paleblack mt-8 flex w-2xl flex-col items-center gap-2 rounded-md p-4 text-center text-lg"
+    class="bg-paleblack relative mt-8 flex w-2xl flex-col items-center gap-2 rounded-md p-4 text-center text-lg"
   >
     <span class="text-lavender mb-4">tourney overlay</span>
+    <span
+      class="hover:text-lavender absolute right-8 brightness-50 transition-all hover:cursor-pointer hover:underline hover:brightness-100"
+      >copy overlay link</span
+    >
+
     <div class="flex flex-col">
       <Inputs />
       {@render separator('w-96')}
