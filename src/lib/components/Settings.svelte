@@ -40,7 +40,7 @@
     </div>
     <CheckboxOption description={'use team colors'} bind:checked={settings.useTeamColors} />
     {#if !settings.useTeamColors}
-      <RangeOption description={'hue'} bind:value={settings.hueRotate} />
+      <RangeOption bind:value={settings.hueRotate} />
     {/if}
     <CheckboxOption description={'use PRs'} bind:checked={settings.usePR} />
     <CheckboxOption description={'use single POV'} bind:checked={settings.useSinglePOV} />

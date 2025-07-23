@@ -1,7 +1,7 @@
 <script>
   import { slide } from 'svelte/transition';
 
-  let { description, value = $bindable() } = $props();
+  let { value = $bindable() } = $props();
 </script>
 
 <div transition:slide={{ duration: 250 }} class="flex flex-col">
