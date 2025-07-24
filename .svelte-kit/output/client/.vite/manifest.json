@@ -1,6 +1,6 @@
 {
   "node_modules/@sveltejs/kit/src/runtime/client/bundle.js": {
-    "file": "_app/immutable/bundle.DNEvn-GE.js",
+    "file": "_app/immutable/bundle.DNKD6j03.js",
     "name": "bundle",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/bundle.js",
     "isEntry": true,
@@ -18,7 +18,7 @@
     "src": "src/lib/fonts/UbuntuMono.ttf"
   },
   "style.css": {
-    "file": "_app/immutable/assets/style.o_hx9dr_.css",
+    "file": "_app/immutable/assets/style.CR974epx.css",
     "src": "style.css"
   }
 }

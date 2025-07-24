@@ -14,6 +14,15 @@ function run_all(arr) {
     arr[i]();
   }
 }
+function deferred() {
+  var resolve;
+  var reject;
+  var promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  return { promise, resolve, reject };
+}
 function equals(value) {
   return value === this.v;
 }
@@ -24,16 +33,17 @@ function safe_equals(value) {
   return !safe_not_equal(value, this.v);
 }
 export {
-  array_prototype as a,
-  get_prototype_of as b,
-  is_extensible as c,
-  index_of as d,
+  deferred as a,
+  array_prototype as b,
+  get_prototype_of as c,
+  define_property as d,
   equals as e,
-  define_property as f,
+  is_extensible as f,
   get_descriptor as g,
-  array_from as h,
+  index_of as h,
   is_array as i,
-  safe_not_equal as j,
+  array_from as j,
+  safe_not_equal as k,
   noop as n,
   object_prototype as o,
   run_all as r,
