@@ -43,7 +43,16 @@
       <RangeOption bind:value={settings.hueRotate} />
     {/if}
     <CheckboxOption description={'use PRs'} bind:checked={settings.usePR} />
-    <CheckboxOption description={'use single POV'} bind:checked={settings.useSinglePOV} />
-    <CheckboxOption description={'use WebSocket timer'} bind:checked={settings.useWebSocket} />
+    <CheckboxOption
+      description={'use single POV (not implemented)'}
+      bind:checked={settings.useSinglePOV}
+    />
+    {#if !settings.useSinglePOV}
+      <CheckboxOption
+        description={'use WebSocket timer (not implemented)'}
+        WebSocket={true}
+        bind:checked={settings.useWebSocket}
+      />
+    {/if}
   </div>
 {/if}

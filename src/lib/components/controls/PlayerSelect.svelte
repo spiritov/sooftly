@@ -19,9 +19,9 @@
     }
   }
 
-  function removeOption(e, category, index) {
+  function removeOption(event, category, index) {
     const values = categories.get(category);
-    e.preventDefault();
+    event.preventDefault();
     categories.set(category, values.toSpliced(index, 1));
   }
 </script>
@@ -34,7 +34,7 @@
         {name}
         selected={index === nameIndex}
         onclick={() => setIndex('Name', index)}
-        oncontextmenu={(e) => removeOption(e, 'name', index)}
+        oncontextmenu={(event) => removeOption(event, 'name', index)}
       />
     {/each}
   </div>
@@ -47,7 +47,7 @@
         withFlag={true}
         selected={index === flagIndex}
         onclick={() => setIndex('Flag', index)}
-        oncontextmenu={(e) => removeOption(e, 'flag', index)}
+        oncontextmenu={(event) => removeOption(event, 'flag', index)}
       />
     {/each}
   </div>

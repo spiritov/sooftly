@@ -18,6 +18,7 @@ export const defaultSettings = {
   rightPR: '',
   leftScore: 0,
   rightScore: 0,
+  map: '',
   stage: ''
 };
 
@@ -58,5 +59,6 @@ export const settings = $state({
   rightPR: '',
   leftScore: 0,
   rightScore: 0,
+  map: '',
   stage: ''
 });

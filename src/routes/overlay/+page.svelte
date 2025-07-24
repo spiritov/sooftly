@@ -1,0 +1,112 @@
+<script>
+  import { settings } from '$lib/stores/settings.svelte';
+  import { browser } from '$app/environment';
+  import { fade } from 'svelte/transition';
+
+  const bluGradient = 'from-tf-blu to-fullblack/60 to-75%';
+  const redGradient = 'from-tf-red to-fullblack/60 to-75%';
+  let leftGradient = $derived(
+    'from-overlay-orange/90 to-fullblack/60 to-75% hue-rotate-' + settings.hueRotate
+  );
+  let rightGradient = $derived(
+    'from-overlay-orange/90 to-fullblack/60 to-75% hue-rotate-' + settings.hueRotate
+  );
+
+  if (browser)
+    window.addEventListener('storage', (event) => {
+      settings[event.key] = event.newValue;
+    });
+</script>
+
+<div class="font-{settings.font.toLowerCase()} flex h-screen w-screen flex-col overflow-hidden">
+  <div class="flex h-32 w-full">
+    {@render topBar('left')}
+    {@render topBar('right')}
+  </div>
+  {@render POVs()}
+  {@render stageAndMap()}
+</div>
+
+{#snippet topBar(side)}
+  <div
+    class="relative flex basis-1/2 items-center gap-4 {side === 'left'
+      ? 'flex-row text-left'
+      : 'flex-row-reverse text-right'}"
+  >
+    <div
+      class="absolute -z-10 h-full w-full {side === 'left'
+        ? `bg-linear-to-r/oklch ${settings.useTeamColors === 'true' ? bluGradient : leftGradient}`
+        : `bg-linear-to-l/oklch ${settings.useTeamColors === 'true' ? redGradient : rightGradient}`}"
+    ></div>
+    <div id="spacer"></div>
+    {#if settings[side + 'Flag']}
+      <img
+        class="relative z-50 flex h-24 w-fit rounded-lg"
+        src="https://countryflagsapi.netlify.app/flag/{settings[side + 'Flag']}.svg"
+        alt="flag"
+      />
+    {/if}
+    <div class="flex flex-col gap-2 text-5xl">
+      {#key settings[side + 'Name']}
+        <span in:fade>{settings[side + 'Name']}</span>
+      {/key}
+      <div class="flex gap-2 {side === 'left' ? 'flex-row' : 'flex-row-reverse'}">
+        {#each { length: settings[side + 'Score'] }}
+          <div
+            class="starting:border-palewhite/50 starting:bg-overlay-orange/0 border-palewhite/50 bg-overlay-orange size-8 border-4 transition-colors duration-1000 {settings.useTeamColors ===
+            'true'
+              ? ''
+              : `hue-rotate-${settings.hueRotate}`}"
+          ></div>
+        {/each}
+        {#each { length: settings.maxScore - settings[side + 'Score'] }}
+          <div class="border-palewhite/50 size-8 border-4"></div>
+        {/each}
+        {#if settings.usePR === 'true'}
+          <span class="relative bottom-0.5 text-3xl opacity-50">PR {settings[side + 'PR']}</span>
+        {/if}
+      </div>
+    </div>
+  </div>
+{/snippet}
+
+{#snippet POVs()}
+  <div class="bg-palewhite/50 flex h-[540px] w-full">
+    {#each { length: 2 }}
+      <div
+        class="flex basis-1/2 items-center justify-center border-dashed border-white text-3xl first:border-r-2"
+      >
+        960x540px
+      </div>
+    {/each}
+  </div>
+{/snippet}
+
+{#snippet stageAndMap()}
+  <div class="flex h-16 w-full justify-between text-3xl">
+    {#if settings.stage}
+      <div
+        class="bg-fullblack/60 border-palewhite/50 relative right-8 min-w-64 skew-x-[-30deg] rounded-br-xl border-r-4 border-b-4 px-12"
+      >
+        {#key settings.stage}
+          <span
+            in:fade
+            class="relative left-2 flex w-full skew-x-[30deg] items-center justify-center py-3"
+            >{settings.stage}</span
+          >
+        {/key}
+      </div>
+    {/if}
+    {#if settings.map}
+      <div
+        class="bg-fullblack/60 border-palewhite/50 relative left-8 ml-auto min-w-64 skew-x-[30deg] rounded-bl-xl border-b-4 border-l-4 px-12"
+      >
+        {#key settings.map}
+          <span in:fade class="relative right-2 flex w-full skew-x-[-30deg] justify-center py-3"
+            >{settings.map}</span
+          >
+        {/key}
+      </div>
+    {/if}
+  </div>
+{/snippet}

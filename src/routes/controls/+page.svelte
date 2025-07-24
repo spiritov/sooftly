@@ -36,15 +36,11 @@
   });
 </script>
 
-<div class="flex h-full w-full justify-center">
+<div class="flex size-full justify-center">
   <div
-    class="bg-paleblack relative mt-8 flex w-2xl flex-col items-center gap-2 rounded-md p-4 text-center text-lg"
+    class="bg-paleblack my-8 flex w-2xl flex-col items-center gap-2 rounded-md p-4 text-center text-lg"
   >
     <span class="text-lavender mb-4">tourney overlay</span>
-    <span
-      class="hover:text-lavender absolute right-8 brightness-50 transition-all hover:cursor-pointer hover:underline hover:brightness-100"
-      >copy overlay link</span
-    >
 
     <div class="flex flex-col">
       <Inputs />
@@ -68,3 +64,11 @@
 {#snippet separator(styles)}
   <hr class="border-palegrey my-2 self-center border-1 border-solid {styles}" />
 {/snippet}
+
+<style lang="postcss">
+  @reference '$lib/css/app.css';
+
+  :global(body) {
+    @apply bg-black;
+  }
+</style>

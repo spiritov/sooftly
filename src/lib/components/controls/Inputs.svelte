@@ -6,17 +6,17 @@
   let display = $state(true);
   let arrow = $derived(display ? '˅' : '>');
 
-  function inputKeypress(e, category) {
-    const inputValue = e.target.value;
-    if (e.key === 'Enter' && inputValue.length > 0) {
+  function inputKeypress(event, category) {
+    const inputValue = event.target.value;
+    if (event.key === 'Enter' && inputValue.length > 0) {
       const values = categories.get(category);
 
       if (category === 'flag' && inputValue.length === 2) {
         categories.set(category, values.concat([inputValue.toUpperCase()]));
-        e.target.value = '';
+        event.target.value = '';
       } else {
         categories.set(category, values.concat([[inputValue]]));
-        e.target.value = '';
+        event.target.value = '';
       }
     }
   }
@@ -32,7 +32,7 @@
 {#if display}
   <div class="flex w-96 flex-col gap-0.5 self-center" transition:slide={{ duration: 250 }}>
     {#each categories as [category, _]}
-      <InputCategory {category} onkeypress={(e) => inputKeypress(e, category)} />
+      <InputCategory {category} onkeypress={(event) => inputKeypress(event, category)} />
     {/each}
   </div>
 {/if}

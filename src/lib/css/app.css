@@ -27,19 +27,21 @@
   --color-lavender: #cea5fb;
   --color-salmon: #fa7970;
   --color-palewhite: #ecf2f8;
-  --color-black: #212326;
-  --color-paleblack: #303235;
-  --color-grey: #3f4144;
-  --color-palegrey: #4e5053;
+  --color-black: #232323;
+  --color-paleblack: #323232;
+  --color-grey: #434343;
+  --color-palegrey: #525252;
+  --color-fullblack: #000000;
 
   --color-overlay-orange: oklch(0.837 0.128 66.29);
+  --color-tf-blu: #5885a2;
+  --color-tf-red: #b8383b;
 }
 
 /* global styling */
 @layer base {
   html {
     font-family: theme(--font-ubuntumono);
-    background-color: theme(--color-black);
     color: theme(--color-palewhite);
   }
 

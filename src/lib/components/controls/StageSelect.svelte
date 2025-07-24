@@ -9,9 +9,9 @@
     settings.stage = categories.get('stage')[index];
   }
 
-  function removeOption(e, index) {
+  function removeOption(event, index) {
     const values = categories.get('stage');
-    e.preventDefault();
+    event.preventDefault();
     categories.set('stage', values.toSpliced(index, 1));
   }
 
@@ -34,7 +34,7 @@
         {name}
         selected={index === stageIndex}
         onclick={() => setIndex(index)}
-        oncontextmenu={(e) => removeOption(e, index)}
+        oncontextmenu={(event) => removeOption(event, index)}
       />
     {/each}
   </div>
