@@ -76,7 +76,7 @@
   <div transition:slide class="bg-palewhite/50 flex h-[540px] w-full">
     {#each { length: 2 }}
       <div
-        class="flex basis-1/2 items-center justify-center border-dashed border-white text-3xl first:border-r-[1px]"
+        class="flex basis-1/2 items-center justify-center border-white text-3xl first:border-r-[1px]"
       >
         960x540px
       </div>
