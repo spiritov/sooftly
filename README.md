@@ -19,7 +19,7 @@
 5. add a background below the overlay. the background from the image above can be used as browser source [from this link](https://spiritov.github.io/web-snippets/jumple%20active%20background/index.html)
 
 ## development
-This overlay is made with Svelte, builds with `adapter-static`, and uses Tailwind for styling.
+this overlay is made with Svelte, builds with `adapter-static`, and uses Tailwind for styling.
 
 install local dependencies..
 ```console
