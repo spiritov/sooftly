@@ -1,15 +1,15 @@
 <script>
   import { settings } from '$lib/stores/settings.svelte';
   import { browser } from '$app/environment';
-  import { fade } from 'svelte/transition';
+  import { fade, slide } from 'svelte/transition';
 
-  const bluGradient = 'from-tf-blu to-fullblack/60 to-75%';
-  const redGradient = 'from-tf-red to-fullblack/60 to-75%';
+  const bluGradient = `from-tf-blu ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`;
+  const redGradient = `from-tf-red ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`;
   let leftGradient = $derived(
-    'from-overlay-orange/90 to-fullblack/60 to-75% hue-rotate-' + settings.hueRotate
+    `from-overlay-orange/90 ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
   let rightGradient = $derived(
-    'from-overlay-orange/90 to-fullblack/60 to-75% hue-rotate-' + settings.hueRotate
+    `from-overlay-orange/90 ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
 
   if (browser)
@@ -23,7 +23,9 @@
     {@render topBar('left')}
     {@render topBar('right')}
   </div>
-  {@render POVs()}
+  {#if settings.useSinglePOV !== 'true'}
+    {@render POVs()}
+  {/if}
   {@render stageAndMap()}
 </div>
 
@@ -62,7 +64,7 @@
         {#each { length: settings.maxScore - settings[side + 'Score'] }}
           <div class="border-palewhite/50 size-8 border-4"></div>
         {/each}
-        {#if settings.usePR === 'true'}
+        {#if settings.usePR === 'true' || settings.usePR}
           <span class="relative bottom-0.5 text-3xl opacity-50">PR {settings[side + 'PR']}</span>
         {/if}
       </div>
@@ -71,10 +73,10 @@
 {/snippet}
 
 {#snippet POVs()}
-  <div class="bg-palewhite/50 flex h-[540px] w-full">
+  <div transition:slide class="bg-palewhite/50 flex h-[540px] w-full">
     {#each { length: 2 }}
       <div
-        class="flex basis-1/2 items-center justify-center border-dashed border-white text-3xl first:border-r-2"
+        class="flex basis-1/2 items-center justify-center border-dashed border-white text-3xl first:border-r-[1px]"
       >
         960x540px
       </div>
@@ -86,7 +88,7 @@
   <div class="flex h-16 w-full justify-between text-3xl">
     {#if settings.stage}
       <div
-        class="bg-fullblack/60 border-palewhite/50 relative right-8 min-w-64 skew-x-[-30deg] rounded-br-xl border-r-4 border-b-4 px-12"
+        class="bg-fullblack/90 border-palewhite/50 relative right-8 min-w-64 skew-x-[-30deg] rounded-br-xl border-r-4 border-b-4 px-12"
       >
         {#key settings.stage}
           <span
@@ -99,7 +101,7 @@
     {/if}
     {#if settings.map}
       <div
-        class="bg-fullblack/60 border-palewhite/50 relative left-8 ml-auto min-w-64 skew-x-[30deg] rounded-bl-xl border-b-4 border-l-4 px-12"
+        class="bg-fullblack/90 border-palewhite/50 relative left-8 ml-auto min-w-64 skew-x-[30deg] rounded-bl-xl border-b-4 border-l-4 px-12"
       >
         {#key settings.map}
           <span in:fade class="relative right-2 flex w-full skew-x-[-30deg] justify-center py-3"
