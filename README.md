@@ -1,4 +1,4 @@
-# sooftly - simple obs overlay for tourneys (localstorage yay)
+> ## sooftly - simple obs overlay for tourneys (localstorage yay)
 ![image](https://github.com/user-attachments/assets/b3944d9a-2008-4d7e-8220-b4b843e194ed)
 
 ## controls
