@@ -3,8 +3,12 @@
   import { browser } from '$app/environment';
   import { fade, slide } from 'svelte/transition';
 
-  const bluGradient = `from-tf-blu ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`;
-  const redGradient = `from-tf-red ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`;
+  let bluGradient = $derived(
+    `from-tf-blu ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
+  );
+  let redGradient = $derived(
+    `from-tf-red ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
+  );
   let leftGradient = $derived(
     `from-overlay-orange/90 ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );

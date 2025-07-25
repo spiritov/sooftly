@@ -10,7 +10,7 @@
 
   let display = $state(true);
   let arrow = $derived(display ? '˅' : '>');
-  let fontIndex = $state(0);
+  let fontIndex = $state(1);
 
   function fontButtonClick(index) {
     fontIndex = index;
