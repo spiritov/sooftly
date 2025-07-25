@@ -1,7 +1,7 @@
 import { SvelteMap } from 'svelte/reactivity';
 
 export const defaultSettings = {
-  font: 'UbuntuMono',
+  font: 'Lexend',
   usePR: true,
   useTeamColors: false,
   useSinglePOV: false,
@@ -42,7 +42,7 @@ export const categories = new SvelteMap([
 ]);
 
 export const settings = $state({
-  font: 'UbuntuMono',
+  font: 'Lexend',
   usePR: true,
   useTeamColors: false,
   useSinglePOV: false,
