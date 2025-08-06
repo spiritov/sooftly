@@ -15,15 +15,19 @@
   />
   <span>{description}</span>
   {#if WebSocket && settings.useWebSocket}
-    <div class="flex" transition:slide={{ duration: 250 }}>
+    <div class="flex flex-wrap" transition:slide={{ duration: 250 }}>
       <input type="text" placeholder="token" bind:value={token} />
       <ButtonOption
         name={'set'}
-        selected={true}
+        selected={settings.useWebSocketToken !== ''}
         onclick={() => {
           settings.useWebSocketToken = token;
         }}
       />
+      <div class="w-full"></div>
+      <span class="text-palewhite/75 rounded-md bg-black px-1"
+        >token: {settings.useWebSocketToken}</span
+      >
     </div>
   {/if}
 </div>
