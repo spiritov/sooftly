@@ -16,6 +16,8 @@
     `from-overlay-orange/90 ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
 
+  let ws;
+
   if (browser) {
     window.addEventListener('storage', (event) => {
       settings[event.key] = event.newValue;
@@ -25,17 +27,27 @@
       if (settings.useWebSocket === 'true' && settings.useWebSocketToken !== '') {
         const token = settings.useWebSocketToken;
 
+        // test connection
+        // ws = new WebSocket('https://echo.websocket.org/.sse');
+
         // TF2PJ World Cup plugin connection
-        const ws = new WebSocket(`wss://flyio-silent-sea-6505.fly.dev/?token=${token}`);
+        ws = new WebSocket(`wss://flyio-silent-sea-6505.fly.dev/?token=${token}`);
 
-        ws.addEventListener('open', (event) => {
-          console.log('ws connection opened..');
-        });
+        ws.onopen = (event) => {
+          console.log('[WebSocket] connection opened.');
+        };
 
-        ws.addEventListener('message', (event) => {
-          console.log('ws received..', event.data);
-        });
+        ws.onmessage = (event) => {
+          console.log('[WebSocket] received data..', event.data);
+        };
       }
+
+      return () => {
+        if (ws) {
+          ws.close();
+          console.log('[Websocket] closed previous connection.');
+        }
+      };
     });
   }
 </script>
