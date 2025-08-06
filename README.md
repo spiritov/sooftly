@@ -53,5 +53,5 @@ file tree from `src/`
 ```
 the controls page makes use of components to help make editing or adding controls easier. the overlay page just uses snippets. if you're wanting to expand on the overlay controls or styling..
 - add associated settings you want to control in `settings.svelte.js`
-- edit or expand upon the controls page / components
-- add html on the overlay page for your new settings
+- edit or expand upon `controls/+page.svelte`
+- add html on `overlay/+page.svelte` for your new settings
