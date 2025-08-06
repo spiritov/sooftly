@@ -16,10 +16,28 @@
     `from-overlay-orange/90 ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
 
-  if (browser)
+  if (browser) {
     window.addEventListener('storage', (event) => {
       settings[event.key] = event.newValue;
     });
+
+    $effect(() => {
+      if (settings.useWebSocket === 'true' && settings.useWebSocketToken !== '') {
+        const token = settings.useWebSocketToken;
+
+        // TF2PJ World Cup plugin connection
+        const ws = new WebSocket(`wss://flyio-silent-sea-6505.fly.dev/?token=${token}`);
+
+        ws.addEventListener('open', (event) => {
+          console.log('ws connection opened..');
+        });
+
+        ws.addEventListener('message', (event) => {
+          console.log('ws received..', event.data);
+        });
+      }
+    });
+  }
 </script>
 
 <div class="font-{settings.font.toLowerCase()} flex h-screen w-screen flex-col overflow-hidden">
