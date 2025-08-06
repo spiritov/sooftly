@@ -25,6 +25,7 @@
 
     $effect(() => {
       if (settings.useWebSocket === 'true' && settings.useWebSocketToken !== '') {
+        console.log('browser');
         const token = settings.useWebSocketToken;
 
         // test connection
