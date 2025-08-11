@@ -27,11 +27,10 @@ ex [U:1:123456789] -> 123456789`);
         }
       } else if (category === 'flag' && inputValue.length === 2) {
         categories.set('flag', values.concat([inputValue.toUpperCase()]));
-        event.target.value = '';
       } else {
         categories.set(category, values.concat([inputValue]));
-        event.target.value = '';
       }
+      event.target.value = '';
     }
   }
 </script>

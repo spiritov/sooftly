@@ -12,8 +12,8 @@
   function setIndex(category, index) {
     const key = side + category;
     if (category === 'Name') {
+      settings[key] = categories.get(category.toLowerCase())[index];
       nameIndex = index;
-      settings[key] = JSON.stringify(categories.get(category.toLowerCase())[index]);
     } else {
       settings[key] = categories.get(category.toLowerCase())[index];
       flagIndex = index;

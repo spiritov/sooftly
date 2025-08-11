@@ -4,27 +4,27 @@
   import { fade, slide } from 'svelte/transition';
 
   let bluGradient = $derived(
-    `from-tf-blu ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
+    `from-tf-blu ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
   );
   let redGradient = $derived(
-    `from-tf-red ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
+    `from-tf-red ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
   );
   let leftGradient = $derived(
-    `from-overlay-orange/90 ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
+    `from-overlay-orange/90 ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
   let rightGradient = $derived(
-    `from-overlay-orange/90 ${settings.useSinglePOV !== 'true' ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
+    `from-overlay-orange/90 ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
 
   let ws;
 
   if (browser) {
     window.addEventListener('storage', (event) => {
-      settings[event.key] = event.newValue;
+      settings[event.key] = JSON.parse(event.newValue);
     });
 
     $effect(() => {
-      if (settings.useWebSocket === 'true' && settings.useWebSocketToken !== '') {
+      if (settings.useWebSocket && settings.useWebSocketToken !== '') {
         const token = settings.useWebSocketToken;
 
         // test connection
@@ -45,7 +45,7 @@
       return () => {
         if (ws) {
           ws.close();
-          console.log('[Websocket] closed previous connection.');
+          console.log('[WebSocket] closed previous connection.');
         }
       };
     });
@@ -57,7 +57,7 @@
     {@render topBar('left')}
     {@render topBar('right')}
   </div>
-  {#if settings.useSinglePOV !== 'true'}
+  {#if !settings.useSinglePOV}
     {@render POVs()}
   {/if}
   {@render stageAndMap()}
@@ -71,8 +71,8 @@
   >
     <div
       class="absolute -z-10 h-full w-full {side === 'left'
-        ? `bg-linear-to-r/oklch ${settings.useTeamColors === 'true' ? bluGradient : leftGradient}`
-        : `bg-linear-to-l/oklch ${settings.useTeamColors === 'true' ? redGradient : rightGradient}`}"
+        ? `bg-linear-to-r/oklch ${settings.useTeamColors ? bluGradient : leftGradient}`
+        : `bg-linear-to-l/oklch ${settings.useTeamColors ? redGradient : rightGradient}`}"
     ></div>
     <div id="spacer"></div>
     {#if settings[side + 'Flag']}
@@ -83,14 +83,15 @@
       />
     {/if}
     <div class="flex flex-col gap-2 text-5xl">
-      {#key settings[side + 'Name']}
-        <span in:fade>{JSON.parse(settings[side + 'Name']).name}</span>
-      {/key}
+      {#if settings[side + 'Name']}
+        {#key settings[side + 'Name']}
+          <span in:fade>{settings[side + 'Name'].name}</span>
+        {/key}
+      {/if}
       <div class="flex gap-2 {side === 'left' ? 'flex-row' : 'flex-row-reverse'}">
         {#each { length: settings[side + 'Score'] }}
           <div
-            class="starting:border-palewhite/50 starting:bg-overlay-orange/0 border-palewhite/50 bg-overlay-orange size-8 border-4 transition-colors duration-1000 {settings.useTeamColors ===
-            'true'
+            class="starting:border-palewhite/50 starting:bg-overlay-orange/0 border-palewhite/50 bg-overlay-orange size-8 border-4 transition-colors duration-1000 {settings.useTeamColors
               ? ''
               : `hue-rotate-${settings.hueRotate}`}"
           ></div>
@@ -98,7 +99,7 @@
         {#each { length: settings.maxScore - settings[side + 'Score'] }}
           <div class="border-palewhite/50 size-8 border-4"></div>
         {/each}
-        {#if settings.usePR === 'true' || settings.usePR}
+        {#if settings.usePR}
           <span class="relative bottom-0.5 text-3xl opacity-50">PR {settings[side + 'PR']}</span>
         {/if}
       </div>

@@ -13,9 +13,9 @@
 
   onMount(() => {
     for (const [key, _] of categories) {
-      const savedValues = localStorage.getItem(`saved_${key}s`);
+      const savedValues = JSON.parse(localStorage.getItem(`saved_${key}s`));
       if (savedValues) {
-        categories.set(key, JSON.parse(savedValues));
+        categories.set(key, savedValues);
       }
     }
     mounted = true;
@@ -31,7 +31,7 @@
 
   $effect(() => {
     for (const [key, value] of Object.entries(settings)) {
-      localStorage.setItem(key, value);
+      localStorage.setItem(key, JSON.stringify(value));
     }
   });
 </script>
