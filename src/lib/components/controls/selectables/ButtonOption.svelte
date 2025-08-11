@@ -4,6 +4,7 @@
   let {
     name,
     withFlag = false,
+    withSteamID = '',
     isFont = false,
     isBestOf = false,
     selected = false,
@@ -22,8 +23,9 @@
   {oncontextmenu}
   in:fade
   >{name}
-  {#if withFlag}{@render flag(name)}{/if}</button
->
+  {#if withSteamID}{@render steamIcon()}{/if}
+  {#if withFlag}{@render flag(name)}{/if}
+</button>
 
 {#snippet flag(id)}
   <img
@@ -31,4 +33,14 @@
     src="https://countryflagsapi.netlify.app/flag/{name}.svg"
     alt=""
   />
+{/snippet}
+
+{#snippet steamIcon()}
+  <a
+    class="flex h-6 self-center"
+    href="https://steamcommunity.com/profiles/[U:1:{withSteamID}]"
+    target="_blank"
+  >
+    <img class="ml-1 h-6" src="https://i.imgur.com/sf1ckIB.png" alt="" />
+  </a>
 {/snippet}

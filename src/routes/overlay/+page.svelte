@@ -84,7 +84,7 @@
     {/if}
     <div class="flex flex-col gap-2 text-5xl">
       {#key settings[side + 'Name']}
-        <span in:fade>{settings[side + 'Name']}</span>
+        <span in:fade>{JSON.parse(settings[side + 'Name']).name}</span>
       {/key}
       <div class="flex gap-2 {side === 'left' ? 'flex-row' : 'flex-row-reverse'}">
         {#each { length: settings[side + 'Score'] }}

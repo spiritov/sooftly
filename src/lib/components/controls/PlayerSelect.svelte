@@ -11,10 +11,11 @@
 
   function setIndex(category, index) {
     const key = side + category;
-    settings[key] = categories.get(category.toLowerCase())[index];
     if (category === 'Name') {
       nameIndex = index;
+      settings[key] = JSON.stringify(categories.get(category.toLowerCase())[index]);
     } else {
+      settings[key] = categories.get(category.toLowerCase())[index];
       flagIndex = index;
     }
   }
@@ -30,12 +31,22 @@
   <span>{side} name</span>
   <div class="flex flex-wrap gap-1 px-2">
     {#each categories.get('name') as name, index}
-      <ButtonOption
-        {name}
-        selected={index === nameIndex}
-        onclick={() => setIndex('Name', index)}
-        oncontextmenu={(event) => removeOption(event, 'name', index)}
-      />
+      {#if name.steamid}
+        <ButtonOption
+          withSteamID={name.steamid}
+          name={name.name}
+          selected={index === nameIndex}
+          onclick={() => setIndex('Name', index)}
+          oncontextmenu={(event) => removeOption(event, 'name', index)}
+        />
+      {:else}
+        <ButtonOption
+          name={name.name}
+          selected={index === nameIndex}
+          onclick={() => setIndex('Name', index)}
+          oncontextmenu={(event) => removeOption(event, 'name', index)}
+        />
+      {/if}
     {/each}
   </div>
 
