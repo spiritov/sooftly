@@ -1,7 +1,45 @@
 <script>
   import { settings } from '$lib/stores/settings.svelte';
+  import { websocketState } from '$lib/stores/websocket.svelte';
   import { browser } from '$app/environment';
   import { fade, slide } from 'svelte/transition';
+
+  import WebSocketTimer from '$lib/components/overlay/WebSocketTimer.svelte';
+
+  function resetWebSocketTimer() {
+    websocketState.leftStart = false;
+    websocketState.rightStart = false;
+    websocketState.leftFinish = false;
+    websocketState.rightFinish = false;
+    websocketState.resetPulse = true;
+  }
+
+  function handleWebSocketData(data) {
+    switch (data.type) {
+      case 'timer_start':
+        if (`${data.steamid}` === settings.leftName.steamid) {
+          websocketState.leftFinish = false;
+          websocketState.leftStart = true;
+        } else if (`${data.steamid}` === settings.rightName.steamid) {
+          websocketState.leftFinish = false;
+          websocketState.rightStart = true;
+        }
+        break;
+      // TODO: should i only care about timer_finish here if resets don't count?
+      // case 'timer_stop':
+      case 'timer_finish':
+        if (`${data.steamid}` === settings.leftName.steamid) {
+          websocketState.leftFinish = true;
+          websocketState.leftFinishTime = Math.round(data.time * 100);
+        } else if (`${data.steamid}` === settings.rightName.steamid) {
+          websocketState.rightFinish = true;
+          websocketState.rightFinishTime = Math.round(data.time * 100);
+        }
+        break;
+      default: // typically a welcome event
+        break;
+    }
+  }
 
   let bluGradient = $derived(
     `from-tf-blu ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
@@ -43,7 +81,10 @@
         };
 
         ws.onmessage = (event) => {
-          console.log('[WebSocket] received data..', event.data);
+          const data = JSON.parse(event.data);
+          console.log('[WebSocket] received data..', data);
+
+          handleWebSocketData(data);
         };
       }
 
@@ -54,11 +95,22 @@
         }
       };
     });
+
+    if (settings.useWebSocket && settings.useWebSocketToken !== '') {
+      $effect(() => {
+        const leftName = settings.leftName;
+        const rightName = settings.rightName;
+        resetWebSocketTimer();
+      });
+    }
   }
 </script>
 
 <div class="font-{settings.font.toLowerCase()} flex h-screen w-screen flex-col overflow-hidden">
-  <div class="flex h-32 w-full">
+  <div class="relative flex h-32 w-full shrink-0">
+    {#if /*settings.useWebSocket && settings.useWebSocketToken !== '' && settings.leftName.steamid && settings.rightName.steamid*/ true}
+      <WebSocketTimer />
+    {/if}
     {@render topBar('left')}
     {@render topBar('right')}
   </div>
