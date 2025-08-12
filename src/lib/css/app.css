@@ -17,11 +17,17 @@
   src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'chivomono';
+  src: url('../fonts/ChivoMono.ttf') format('truetype');
+}
+
 /* tailwind theme */
 @theme {
   --font-ubuntumono: 'ubuntumono', 'ui-sans-serif', 'system-ui', 'sans-serif';
   --font-lexend: 'lexend', 'ui-sans-serif', 'system-ui', 'sans-serif';
   --font-montserrat: 'montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif';
+  --font-chivomono: 'chivomono', 'Lucida Console', 'system-ui', 'monospace';
   --color-*: initial;
   --color-darklavender: #b087dd;
   --color-lavender: #cea5fb;
@@ -36,6 +42,7 @@
   --color-overlay-orange: oklch(0.837 0.128 66.29);
   --color-tf-blu: #5885a2;
   --color-tf-red: #b8383b;
+  --color-tempus-green: #64e764;
 }
 
 /* global styling */
