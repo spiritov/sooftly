@@ -44,12 +44,10 @@
     {/if}
     <CheckboxOption description={'use PRs'} bind:checked={settings.usePR} />
     <CheckboxOption description={'use single POV'} bind:checked={settings.useSinglePOV} />
-    {#if !settings.useSinglePOV}
-      <CheckboxOption
-        description={'use WebSocket timer (not implemented)'}
-        WebSocket={true}
-        bind:checked={settings.useWebSocket}
-      />
-    {/if}
+    <CheckboxOption
+      description={'use WebSocket timer (requires token)'}
+      WebSocket={true}
+      bind:checked={settings.useWebSocket}
+    />
   </div>
 {/if}
