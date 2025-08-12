@@ -19,6 +19,11 @@
   let ws;
 
   if (browser) {
+    // update initial overlay from localStorage
+    for (const [key, _] of Object.entries(settings)) {
+      settings[key] = JSON.parse(localStorage.getItem(key));
+    }
+
     window.addEventListener('storage', (event) => {
       settings[event.key] = JSON.parse(event.newValue);
     });
