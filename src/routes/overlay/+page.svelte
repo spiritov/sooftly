@@ -54,6 +54,7 @@
     `from-overlay-orange/90 ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
 
+  let wsConnected = $state(false);
   let ws;
 
   if (browser) {
@@ -78,6 +79,7 @@
 
         ws.onopen = (event) => {
           console.log('[WebSocket] connection opened.');
+          wsConnected = true;
         };
 
         ws.onmessage = (event) => {
@@ -92,6 +94,7 @@
         if (ws) {
           ws.close();
           console.log('[WebSocket] closed previous connection.');
+          wsConnected = false;
         }
       };
     });
@@ -108,8 +111,21 @@
 
 <div class="font-{settings.font.toLowerCase()} flex h-screen w-screen flex-col overflow-hidden">
   <div class="relative flex h-32 w-full shrink-0">
-    {#if /*settings.useWebSocket && settings.useWebSocketToken !== '' && settings.leftName.steamid && settings.rightName.steamid*/ true}
+    {#if settings.useWebSocket && settings.useWebSocketToken !== '' && settings.leftName.steamid && settings.rightName.steamid}
       <WebSocketTimer />
+      {#if !wsConnected}
+        <span in:fade class="absolute z-999 h-screen w-full bg-black/60 p-64 text-4xl"
+          >WebSocket connecting...
+          <span class="text-palewhite/60 text-3xl"
+            >(if this takes more than a few seconds after setting the token, it's likely failed.)</span
+          ></span
+        >
+      {:else}
+        <span
+          class="absolute z-999 h-screen w-full bg-black/60 p-64 text-4xl opacity-0 transition-opacity delay-1000 duration-1000 starting:opacity-100"
+          >WebSocket connected.</span
+        >
+      {/if}
     {/if}
     {@render topBar('left')}
     {@render topBar('right')}
