@@ -3,23 +3,35 @@
 
   let leftDs = $state(0);
   let rightDs = $state(0);
-  let leftTime = $derived(dsToTime(leftDs));
-  let rightTime = $derived(dsToTime(rightDs));
+  let leftTime = $derived(csToTime(leftDs));
+  let rightTime = $derived(csToTime(rightDs));
 
-  // for finish time
+  // for finish (and stopwatch..?) time
   function csToTime(cs) {
-    const minutes = `${Math.floor(cs / 6000)}`.padStart(2, '0');
-    const seconds = `${Math.floor((cs / 100) % 60)}`.padStart(2, '0');
-    const centiseconds = `${Math.floor(cs % 100)}`.padStart(2, '0');
+    const minutes = Math.floor(cs / 6000)
+      .toString()
+      .padStart(2, '0');
+    const seconds = Math.floor((cs / 100) % 60)
+      .toString()
+      .padStart(2, '0');
+    const centiseconds = Math.floor(cs % 100)
+      .toString()
+      .padStart(2, '0');
 
     return `${minutes}:${seconds}.${centiseconds}`;
   }
 
   // for stopwatch time
   function dsToTime(ds) {
-    const minutes = `${Math.floor(ds / 600)}`.padStart(2, '0');
-    const seconds = `${Math.floor((ds / 10) % 60)}`.padStart(2, '0');
-    const deciseconds = Math.floor(ds % 10);
+    const minutes = Math.floor(ds / 600)
+      .toString()
+      .padStart(2, '0');
+    const seconds = Math.floor((ds / 10) % 60)
+      .toString()
+      .padStart(2, '0');
+    const deciseconds = Math.floor(ds % 10)
+      .toString()
+      .padStart(2, '0');
 
     return `${minutes}:${seconds}.${deciseconds}`;
   }
@@ -27,10 +39,10 @@
   $effect(() => {
     // run is ongoing
     if (websocketState.leftStart && !websocketState.leftFinish) {
-      const startDate = Math.floor(Date.now() / 100);
+      const startDate = Math.floor(Date.now() / 10);
       const leftTimer = setInterval(() => {
-        leftDs = Math.floor(Date.now() / 100) - startDate;
-      }, 100);
+        leftDs = Math.floor(Date.now() / 10 - startDate);
+      }, 77);
 
       return () => {
         clearInterval(leftTimer);
@@ -41,10 +53,10 @@
   $effect(() => {
     // run is ongoing
     if (websocketState.rightStart && !websocketState.rightFinish) {
-      const startDate = Math.floor(Date.now() / 100);
+      const startDate = Date.now() / 10;
       const rightTimer = setInterval(() => {
-        rightDs = Math.floor(Date.now() / 100) - startDate;
-      }, 100);
+        rightDs = Math.floor(Date.now() / 10 - startDate);
+      }, 77);
 
       return () => {
         clearInterval(rightTimer);
