@@ -45,7 +45,9 @@ ex [U:1:123456789] -> 123456789`);
 {#if display}
   <div class="flex w-96 flex-col gap-0.5 self-center" transition:slide={{ duration: 250 }}>
     {#each categories as [category, _]}
-      <InputCategory {category} onkeypress={(event) => inputKeypress(event, category)} />
+      {#if !settings.useTeams && category === 'team'}{:else}
+        <InputCategory {category} onkeypress={(event) => inputKeypress(event, category)} />
+      {/if}
     {/each}
   </div>
 {/if}

@@ -69,17 +69,19 @@
     {/each}
   </div>
 
-  <span>team</span>
-  <div class="flex flex-wrap gap-1 px-2">
-    {#each categories.get('team') as team, index}
-      <ButtonOption
-        name={team}
-        selected={index === teamIndex}
-        onclick={() => setIndex('Team', index)}
-        oncontextmenu={(event) => removeOption(event, 'team', index)}
-      />
-    {/each}
-  </div>
+  {#if settings.useTeams}
+    <span>team</span>
+    <div class="flex flex-wrap gap-1 px-2">
+      {#each categories.get('team') as team, index}
+        <ButtonOption
+          name={team}
+          selected={index === teamIndex}
+          onclick={() => setIndex('Team', index)}
+          oncontextmenu={(event) => removeOption(event, 'team', index)}
+        />
+      {/each}
+    </div>
+  {/if}
 
   {#if settings.usePR}
     <InputPR bind:value={settings[side + 'PR']} />

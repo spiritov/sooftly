@@ -194,7 +194,7 @@
 
 {#snippet stageAndMap()}
   <div class="text-palewhite/75 relative flex h-16 w-full justify-between text-3xl">
-    {#if settings.useTeams}
+    {#if settings.useTeams && !settings.useSinglePOV}
       <div class="absolute flex h-15 w-full">
         <span class="absolute w-full justify-center self-center text-center">vs</span>
         {@render teamsBG('left')}
