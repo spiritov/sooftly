@@ -43,6 +43,7 @@
       <RangeOption bind:value={settings.hueRotate} />
     {/if}
     <CheckboxOption description={'use PRs'} bind:checked={settings.usePR} />
+    <CheckboxOption description={'use teams'} bind:checked={settings.useTeams} />
     <CheckboxOption description={'use single POV'} bind:checked={settings.useSinglePOV} />
     <CheckboxOption
       description={'use WebSocket timer (requires token)'}

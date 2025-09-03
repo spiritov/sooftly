@@ -37,6 +37,7 @@ export const defaultStages = [
 export const categories = new SvelteMap([
   ['name', []],
   ['flag', []],
+  ['team', []],
   ['map', []],
   ['stage', defaultStages]
 ]);
@@ -45,6 +46,7 @@ export const settings = $state({
   font: 'Lexend',
   usePR: true,
   useTeamColors: false,
+  useTeams: false,
   useSinglePOV: false,
   useWebSocket: false,
   useWebSocketToken: '',
@@ -55,6 +57,8 @@ export const settings = $state({
   rightName: '',
   leftFlag: '',
   rightFlag: '',
+  leftTeam: '',
+  rightTeam: '',
   leftPR: '',
   rightPR: '',
   leftScore: 0,

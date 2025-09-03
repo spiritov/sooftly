@@ -8,15 +8,21 @@
   let useBorder = $derived(side === 'left');
   let nameIndex = $state(-1);
   let flagIndex = $state(-1);
+  let teamIndex = $state(-1);
 
   function setIndex(category, index) {
     const key = side + category;
-    if (category === 'Name') {
-      settings[key] = categories.get(category.toLowerCase())[index];
-      nameIndex = index;
-    } else {
-      settings[key] = categories.get(category.toLowerCase())[index];
-      flagIndex = index;
+    settings[key] = categories.get(category.toLowerCase())[index];
+    switch (category) {
+      case 'Name':
+        nameIndex = index;
+        break;
+      case 'Flag':
+        flagIndex = index;
+        break;
+      case 'Team':
+        teamIndex = index;
+        break;
     }
   }
 
@@ -59,6 +65,18 @@
         selected={index === flagIndex}
         onclick={() => setIndex('Flag', index)}
         oncontextmenu={(event) => removeOption(event, 'flag', index)}
+      />
+    {/each}
+  </div>
+
+  <span>team</span>
+  <div class="flex flex-wrap gap-1 px-2">
+    {#each categories.get('team') as team, index}
+      <ButtonOption
+        name={team}
+        selected={index === teamIndex}
+        onclick={() => setIndex('Team', index)}
+        oncontextmenu={(event) => removeOption(event, 'team', index)}
       />
     {/each}
   </div>

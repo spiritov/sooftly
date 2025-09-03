@@ -42,16 +42,16 @@
   }
 
   let bluGradient = $derived(
-    `from-tf-blu ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
+    `from-tf-blu ${!settings.useSinglePOV ? ' to-fullblack/60' : ' to-fullblack/0'} to-75%`
   );
   let redGradient = $derived(
-    `from-tf-red ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75%`
+    `from-tf-red ${!settings.useSinglePOV ? ' to-fullblack/60' : ' to-fullblack/0'} to-75%`
   );
   let leftGradient = $derived(
-    `from-overlay-orange/90 ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
+    `from-overlay-orange/90 ${!settings.useSinglePOV ? ' to-fullblack/60' : ' to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
   let rightGradient = $derived(
-    `from-overlay-orange/90 ${!settings.useSinglePOV ? ' to-fullblack/60' : 'to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
+    `from-overlay-orange/90 ${!settings.useSinglePOV ? ' to-fullblack/60' : ' to-fullblack/0'} to-75% hue-rotate-${settings.hueRotate}`
   );
 
   let wsConnected = $state(false);
@@ -193,7 +193,14 @@
 {/snippet}
 
 {#snippet stageAndMap()}
-  <div class="flex h-16 w-full justify-between text-3xl">
+  <div class="text-palewhite/75 relative flex h-16 w-full justify-between text-3xl">
+    {#if settings.useTeams}
+      <div class="absolute flex h-15 w-full">
+        <span class="absolute w-full justify-center self-center text-center">vs</span>
+        {@render teamsBG('left')}
+        {@render teamsBG('right')}
+      </div>
+    {/if}
     {#if settings.stage}
       <div
         class="bg-fullblack/90 border-palewhite/50 relative right-8 min-w-64 skew-x-[-30deg] rounded-br-xl border-r-4 border-b-4 px-12"
@@ -218,5 +225,21 @@
         {/key}
       </div>
     {/if}
+  </div>
+{/snippet}
+
+{#snippet teamsBG(side, team)}
+  <div class="relative basis-1/2 items-center justify-center gap-4">
+    <div
+      class="absolute -z-10 h-full w-full {side === 'left'
+        ? ` bg-linear-to-r/oklch ${(settings.useTeamColors ? bluGradient : leftGradient).replace('to-fullblack/60', 'to-fullblack/0')} to-90%`
+        : ` bg-linear-to-l/oklch ${(settings.useTeamColors ? redGradient : rightGradient).replace('to-fullblack/60', 'to-fullblack/0')} to-90%`}"
+    ></div>
+    <span
+      class="text-palewhite absolute z-10 flex h-full w-full items-center justify-center text-4xl text-nowrap {side ===
+      'left'
+        ? 'flex-row-reverse'
+        : 'flex-row'}">{settings[side + 'Team']}</span
+    >
   </div>
 {/snippet}
