@@ -11,7 +11,7 @@
 - all options update the overlay immediately
 - right click to remove button options
 - the `use single POV` option acts as a standard overlay for one screen
-- names, flags, maps, and stages are saved via browser `localStorage`, but the options selected aren't
+- names, flags, teams, maps, and stages are saved via browser `localStorage`, but the options selected aren't
 > [!NOTE]
 > if you've used a previous version and the overlay doesn't work properly, try clearing your `localStorage`
 > > in obs, this is done in the browser dock with Right Click -> Inspect -> Application -> Local storage -> Clear All
