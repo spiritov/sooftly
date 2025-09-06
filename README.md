@@ -1,15 +1,16 @@
 > ## sooftly - simple obs overlay for tourneys (localstorage yay)
-![image](https://github.com/user-attachments/assets/b3944d9a-2008-4d7e-8220-b4b843e194ed)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4318d835-1f35-4dbb-9422-55c11fba3e46" />
 
 ## controls
-![image](https://github.com/user-attachments/assets/09d931d6-ffd8-40ad-981c-a1a3eec78fda)
+<img width="1384" height="999" alt="image" src="https://github.com/user-attachments/assets/2e7a30ac-2edd-4a32-a0a6-84b2ba28715d" />
+
 - all options update the overlay immediately
 - right click to remove button options
-- the `use single POV` option acts as a standard overlay for one screen.
+- the `use single POV` option acts as a standard overlay for one screen
 - names, flags, maps, and stages are saved via browser `localStorage`, but the options selected aren't
 > [!NOTE]
->  if you've used a previous version and the overlay doesn't work properly, try clearing your `localStorage`
->  > in obs, this is done in the browser dock with Right Click -> Inspect -> Application -> Local storage -> Clear All
+> if you've used a previous version and the overlay doesn't work properly, try clearing your `localStorage`
+> > in obs, this is done in the browser dock with Right Click -> Inspect -> Application -> Local storage -> Clear All
 
 ## usage for obs
 1. Docks -> Custom Browser Docks
@@ -17,9 +18,15 @@
 3. Sources -> Add Source -> Browser
 4. set [https://spiritov.github.io/sooftly/build/overlay](https://spiritov.github.io/sooftly/build/overlay) for URL, ideally 1920x1080 for dimensions, and remove any custom css unless you'd like to override styles
 5. add a background below the overlay. the background from the image above can be used as browser source [from this link](https://spiritov.github.io/web-snippets/jumple%20active%20background/index.html)
+> [!NOTE]
+> the maps page is optional, and generally intended for use with Tempus Network maps
+6. Sources -> Add Source -> Browser
+7. set [https://spiritov.github.io/sooftly/build/maps](https://spiritov.github.io/sooftly/build/maps) for URL
+8. select the source -> Interact
+9. use `r` key to reset map pick / bans, `left click` to pick, `right click` to ban
 
 ## development
-this overlay is made with Svelte, builds with `adapter-static`, and uses Tailwind for styling.
+this overlay is made with Svelte, builds with `adapter-static`, and uses Tailwind for styling
 
 install local dependencies..
 ```console
@@ -50,6 +57,9 @@ file tree from `src/`
     │   └── +page.svelte
     └── overlay
         └── +page.svelte
+    └── maps
+        └── +page.svelte
+
 ```
 the controls page makes use of components to help make editing or adding controls easier. the overlay page just uses snippets. if you're wanting to expand on the overlay controls or styling..
 - add associated settings you want to control in `settings.svelte.js`
