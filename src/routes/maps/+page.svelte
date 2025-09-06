@@ -1,6 +1,7 @@
 <script>
   import { settings, categories } from '$lib/stores/settings.svelte';
   import { browser } from '$app/environment';
+  import Map from '$lib/components/maps/Map.svelte';
   let maps = $derived(categories.get('saved_maps'));
   maps = [];
   let rows = $derived(getRows());
@@ -58,18 +59,6 @@
     2} grid-rows-{rows} h-screen w-full gap-4 p-4 font-{settings.font.toLowerCase()} text-3xl"
 >
   {#each maps as map, i}
-    <div
-      class="border-palewhite/70 )} relative z-20 flex w-full justify-center overflow-hidden border-4 bg-black/50 bg-cover bg-clip-padding bg-center {maps.length -
-        i >
-      overflow
-        ? 'col-span-2'
-        : `col-span-${Number.parseInt((cols * 2) / overflow)}`}"
-      style="background-image: url('https://wfzq.github.io/Tempus-Tracker/src/data/thumbnails/{map}.jpg')"
-    >
-      <span
-        class="absolute z-30 flex w-full justify-center bg-gradient-to-b from-black/75 from-75% to-black/0 pt-4 pb-8"
-        >{map}</span
-      >
-    </div>
+    <Map {map} colspan={maps.length - i > overflow ? 2 : Number.parseInt((cols * 2) / overflow)} />
   {/each}
 </div>

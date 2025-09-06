@@ -39,6 +39,9 @@
   --color-palegrey: #525252;
   --color-fullblack: #000000;
 
+  --color-cat-red: #f38ba8;
+  --color-cat-green: #a6e3a1;
+
   --color-overlay-orange: oklch(0.837 0.128 66.29);
   --color-tf-blu: #5885a2;
   --color-tf-red: #b8383b;
