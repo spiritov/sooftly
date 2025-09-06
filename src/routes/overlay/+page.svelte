@@ -164,7 +164,7 @@
       <div class="flex gap-2 {side === 'left' ? 'flex-row' : 'flex-row-reverse'}">
         {#each { length: settings[side + 'Score'] }}
           <div
-            class="starting:border-palewhite/50 starting:bg-overlay-orange/0 border-palewhite/50 bg-overlay-orange size-8 border-4 transition-colors duration-1000 {settings.useTeamColors
+            class="starting:border-palewhite/50 starting:bg-overlay-orange/0 border-palewhite/50 bg-overlay-orange shadow-[0px_0px_9px_3px_theme(--color-overlay-orange)] size-8 border-4 transition-all duration-1000 starting:shadow-none {settings.useTeamColors
               ? ''
               : `hue-rotate-${settings.hueRotate}`}"
           ></div>
