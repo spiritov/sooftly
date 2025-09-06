@@ -19,9 +19,15 @@
       case 'timer_start':
         if (`${data.steamid}` === settings.leftName.steamid) {
           websocketState.leftFinish = false;
+
+          // needed twice to flash timer to 0
+          websocketState.leftStart = false;
           websocketState.leftStart = true;
         } else if (`${data.steamid}` === settings.rightName.steamid) {
           websocketState.leftFinish = false;
+
+          // needed twice to flash timer to 0
+          websocketState.rightStart = false;
           websocketState.rightStart = true;
         }
         break;
