@@ -2,7 +2,10 @@
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4318d835-1f35-4dbb-9422-55c11fba3e46" />
 
 ## controls
-<img width="1384" height="1000" alt="image" src="https://github.com/user-attachments/assets/6583252c-6e53-4ee2-a927-bc781967f79a" />
+<img width="1378" height="988" alt="image" src="https://github.com/user-attachments/assets/b7487acd-fa46-41f3-bb46-6db46fad737d" />
+
+## maps
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9b99a578-70cc-4e5a-8207-218a069977b4" />
 
 
 - all options update the overlay immediately
