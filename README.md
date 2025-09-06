@@ -2,7 +2,8 @@
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4318d835-1f35-4dbb-9422-55c11fba3e46" />
 
 ## controls
-<img width="1384" height="999" alt="image" src="https://github.com/user-attachments/assets/2e7a30ac-2edd-4a32-a0a6-84b2ba28715d" />
+<img width="1384" height="1000" alt="image" src="https://github.com/user-attachments/assets/6583252c-6e53-4ee2-a927-bc781967f79a" />
+
 
 - all options update the overlay immediately
 - right click to remove button options
