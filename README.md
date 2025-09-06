@@ -59,8 +59,8 @@ file tree from `src/`
 └── routes
     ├── controls
     │   └── +page.svelte
-    └── overlay
-        └── +page.svelte
+    ├── overlay
+    │   └── +page.svelte
     └── maps
         └── +page.svelte
 
