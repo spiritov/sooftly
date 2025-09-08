@@ -46,6 +46,13 @@
   --color-tf-blu: #5885a2;
   --color-tf-red: #b8383b;
   --color-tempus-green: #64e764;
+
+  --animate-reverse-spin: reverse-spin 1s infinite;
+  @keyframes reverse-spin {
+    from {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 /* global styling */
