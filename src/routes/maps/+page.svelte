@@ -56,7 +56,7 @@
 
 <div
   class="grid grid-cols-{cols *
-    2} grid-rows-{rows} h-screen w-full gap-4 p-4 font-{settings.font.toLowerCase()} text-3xl"
+    2} grid-rows-{rows} h-screen w-screen gap-4 p-4 font-{settings.font.toLowerCase()} text-3xl"
 >
   {#each maps as map, i}
     <Map {map} colspan={maps.length - i > overflow ? 2 : Number.parseInt((cols * 2) / overflow)} />
