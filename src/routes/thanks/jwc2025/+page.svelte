@@ -16,11 +16,11 @@
   }
 </script>
 
-<div class="font-{settings.font.toLowerCase()} flex flex-col gap-14 pt-8">
+<div class="font-{settings.font.toLowerCase()} flex flex-col gap-12 pt-8">
   <div class="flex w-full justify-center gap-64">
     <div class="  flex flex-col gap-2 text-center text-5xl">
       <span>Head Organizers</span>
-      <div class="flex w-full flex-row justify-center gap-8">
+      <div class="flex w-full flex-row justify-center gap-12">
         {#each credits.organizers as credit}
           <Credit {credit} size="xl" />
         {/each}
@@ -29,7 +29,7 @@
 
     <div class="flex flex-col gap-4 text-center text-5xl">
       <span>Executive Producers</span>
-      <div class="flex w-full flex-row justify-center gap-4">
+      <div class="flex w-full flex-row justify-center gap-12">
         {#each credits.exec_producers as credit}
           <Credit {credit} size="xl" />
         {/each}
@@ -50,7 +50,7 @@
       </div>
       <div class="flex flex-col items-center gap-4 text-4xl">
         <span>Trailer</span>
-        <div class="flex gap-4">
+        <div class="flex h-full gap-8">
           {#each credits.production.trailer as credit}
             <Credit {credit} size="lg" />
           {/each}
@@ -65,13 +65,13 @@
 
   <div class="flex w-full justify-center gap-32">
     <div class="flex h-full flex-col items-center gap-4 text-center text-4xl">
-      <span>Server Management</span>
+      <span>Server Infrastructure</span>
       <Credit credit={credits.server_management} size="lg" />
     </div>
 
-    <div class="flex h-full flex-col items-center gap-4 text-center text-4xl">
+    <div class="flex flex-col items-center gap-4 text-center text-4xl">
       <span>Ingame HUD</span>
-      <div class="flex gap-4">
+      <div class="flex h-full gap-8">
         {#each credits.hud as credit}
           <Credit {credit} size="md" />
         {/each}
@@ -79,10 +79,10 @@
     </div>
   </div>
 
-  <div class="flex w-full justify-center">
+  <div class="flex w-full justify-center gap-16">
     <div class="flex w-5/12 flex-col items-center gap-4 text-4xl">
       <span>Jump Fortress Consultants</span>
-      <div class="flex flex-wrap justify-center gap-x-8 gap-y-2">
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
         {#each credits.consultants as credit}
           <Credit {credit} size="sm" />
         {/each}
