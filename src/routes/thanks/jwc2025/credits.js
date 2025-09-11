@@ -96,7 +96,7 @@ export const credits = {
     },
     {
       alias: 'lily',
-      avatar: 'https://files.catbox.moe/7cxhhm.png'
+      avatar: 'https://files.catbox.moe/etl9kj.png'
     },
     {
       alias: 'Matty',
@@ -151,6 +151,10 @@ export const credits = {
     {
       alias: 'Fortress Faceoffs',
       avatar: 'https://files.catbox.moe/442i4v.png'
+    },
+    {
+      alias: 'ADJ',
+      avatar: 'https://files.catbox.moe/fujrx5.png'
     },
     {
       alias: 'osplo',
