@@ -1,46 +1,42 @@
 <script>
   import { settings } from '$lib/stores/settings.svelte';
-  import { websocketState } from '$lib/stores/websocket.svelte';
+  import {
+    timer_start,
+    timer_stop,
+    timer_finish,
+    resetTimer,
+    resetPulse,
+    timer_checkpoint
+  } from '$lib/stores/websocket.svelte';
   import { browser } from '$app/environment';
   import { fade, slide } from 'svelte/transition';
 
   import WebSocketTimer from '$lib/components/overlay/WebSocketTimer.svelte';
 
-  function resetWebSocketTimer() {
-    websocketState.leftStart = false;
-    websocketState.rightStart = false;
-    websocketState.leftFinish = false;
-    websocketState.rightFinish = false;
-    websocketState.resetPulse = true;
-  }
-
   function handleWebSocketData(data) {
+    // track 0 is a map run
+    if (data.track !== 0) return;
+
+    const side =
+      `${data.steamid}` === settings.leftName.steamid
+        ? 'left'
+        : `${data.steamid}` === settings.rightName.steamid
+          ? 'right'
+          : null;
+    if (!side) return;
+
     switch (data.type) {
       case 'timer_start':
-        if (`${data.steamid}` === settings.leftName.steamid) {
-          websocketState.leftFinish = false;
-
-          // needed twice to flash timer to 0
-          websocketState.leftStart = false;
-          websocketState.leftStart = true;
-        } else if (`${data.steamid}` === settings.rightName.steamid) {
-          websocketState.leftFinish = false;
-
-          // needed twice to flash timer to 0
-          websocketState.rightStart = false;
-          websocketState.rightStart = true;
-        }
+        timer_start(side);
         break;
-      // TODO: should i only care about timer_finish here if resets don't count?
-      // case 'timer_stop':
+      case 'timer_stop':
+        timer_stop(side);
+        break;
+      case 'timer_checkpoint':
+        timer_checkpoint(side, data.time);
+        break;
       case 'timer_finish':
-        if (`${data.steamid}` === settings.leftName.steamid) {
-          websocketState.leftFinish = true;
-          websocketState.leftFinishTime = Math.round(data.time * 100);
-        } else if (`${data.steamid}` === settings.rightName.steamid) {
-          websocketState.rightFinish = true;
-          websocketState.rightFinishTime = Math.round(data.time * 100);
-        }
+        timer_finish(side, data.time);
         break;
       default: // typically a welcome event
         break;
@@ -109,7 +105,9 @@
       $effect(() => {
         const leftName = settings.leftName;
         const rightName = settings.rightName;
-        resetWebSocketTimer();
+        resetTimer('left');
+        resetTimer('right');
+        resetPulse.state = true;
       });
     }
   }

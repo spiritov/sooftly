@@ -1,10 +1,10 @@
 <script>
-  import { websocketState } from '$lib/stores/websocket.svelte';
-
-  let leftDs = $state(0);
-  let rightDs = $state(0);
-  let leftTime = $derived(csToTime(leftDs));
-  let rightTime = $derived(csToTime(rightDs));
+  import { leftTimer, rightTimer, resetTimer, resetPulse } from '$lib/stores/websocket.svelte';
+  let leftCs = $state(0);
+  let rightCs = $state(0);
+  let leftTime = $derived(csToTime(leftCs));
+  let rightTime = $derived(csToTime(rightCs));
+  const updateInterval = 77;
 
   // for finish (and stopwatch..?) time
   function csToTime(cs) {
@@ -37,12 +37,20 @@
   }
 
   $effect(() => {
+    if (resetPulse.state) {
+      leftCs = 0;
+      rightCs = 0;
+      resetPulse.state = false;
+    }
+  });
+
+  $effect(() => {
     // run is ongoing
-    if (websocketState.leftStart && !websocketState.leftFinish) {
+    if (leftTimer.timer_start) {
       const startDate = Math.floor(Date.now() / 10);
       const leftTimer = setInterval(() => {
-        leftDs = Math.floor(Date.now() / 10 - startDate);
-      }, 77);
+        leftCs = Math.floor(Date.now() / 10 - startDate);
+      }, updateInterval);
 
       return () => {
         clearInterval(leftTimer);
@@ -52,11 +60,11 @@
 
   $effect(() => {
     // run is ongoing
-    if (websocketState.rightStart && !websocketState.rightFinish) {
+    if (rightTimer.timer_start) {
       const startDate = Date.now() / 10;
       const rightTimer = setInterval(() => {
-        rightDs = Math.floor(Date.now() / 10 - startDate);
-      }, 77);
+        rightCs = Math.floor(Date.now() / 10 - startDate);
+      }, updateInterval);
 
       return () => {
         clearInterval(rightTimer);
@@ -65,29 +73,31 @@
   });
 
   $effect(() => {
-    if (websocketState.resetPulse) {
-      leftDs = 0;
-      rightDs = 0;
-      websocketState.resetPulse = false;
+    if (leftTimer.timer_stop) {
+      leftCs = 0;
+    }
+  });
+
+  $effect(() => {
+    if (rightTimer.timer_stop) {
+      rightCs = 0;
     }
   });
 </script>
 
 <div class="absolute flex h-32 w-full items-center justify-center gap-36">
-  {#key [websocketState.leftStart, websocketState.leftFinish]}
-    <span
-      class="{!websocketState.leftStart
-        ? 'text-palewhite/50'
-        : 'text-palewhite'} font-chivomono text-center text-5xl transition-colors duration-2000"
-      >{!websocketState.leftFinish ? leftTime : csToTime(websocketState.leftFinishTime)}</span
-    >
-  {/key}
-  {#key [websocketState.rightStart, websocketState.rightFinish]}
-    <span
-      class="{!websocketState.rightStart
-        ? 'text-palewhite/50'
-        : 'text-palewhite'} font-chivomono text-center text-5xl transition-colors duration-2000"
-      >{!websocketState.rightFinish ? rightTime : csToTime(websocketState.rightFinishTime)}</span
-    >
-  {/key}
+  <span
+    class="{!leftTimer.timer_start
+      ? 'text-palewhite/40'
+      : 'text-palewhite'} font-chivomono text-center text-5xl transition-colors duration-1000"
+    >{!leftTimer.timer_finish ? leftTime : csToTime(Math.trunc(leftTimer.finishTime * 100))}</span
+  >
+  <span
+    class="{!rightTimer.timer_start
+      ? 'text-palewhite/40'
+      : 'text-palewhite'} font-chivomono text-center text-5xl transition-colors duration-1000"
+    >{!rightTimer.timer_finish
+      ? rightTime
+      : csToTime(Math.trunc(rightTimer.finishTime * 100))}</span
+  >
 </div>
