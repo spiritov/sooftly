@@ -14,6 +14,7 @@ export const rightTimer = $state({
   finishTime: 0
 });
 
+// cannot use with defaultTimer
 export const leftCheckpointTimes = new SvelteMap([]);
 export const rightCheckpointTimes = new SvelteMap([]);
 
@@ -32,9 +33,11 @@ export function timer_start(side) {
 export function timer_stop(side) {
   if (side === 'left' && !leftTimer.timer_finish) {
     Object.assign(leftTimer, defaultTimer);
+    leftCheckpointTimes.clear();
     leftTimer.timer_stop = true;
   } else if (side === 'right' && !rightTimer.timer_finish) {
     Object.assign(rightTimer, defaultTimer);
+    leftCheckpointTimes.clear();
     rightTimer.timer_stop = true;
   }
 }
@@ -64,8 +67,10 @@ export function timer_checkpoint(side, checkpointName, checkpointTime) {
 export function resetTimer(side) {
   if (side === 'left') {
     Object.assign(leftTimer, defaultTimer);
+    leftCheckpointTimes.clear();
   } else {
     Object.assign(rightTimer, defaultTimer);
+    rightCheckpointTimes.clear();
   }
 }
 
@@ -77,8 +82,7 @@ const defaultTimer = {
   timer_start: false,
   timer_stop: false,
   timer_finish: false,
-  finishTime: 0,
-  checkpointTimes: new SvelteMap([])
+  finishTime: 0
 };
 
 export function csToTime(cs) {
