@@ -9,6 +9,7 @@
   import { SvelteMap } from 'svelte/reactivity';
   import { settings } from '$lib/stores/settings.svelte';
   import { browser } from '$app/environment';
+  import { slide, fade } from 'svelte/transition';
 
   let merged = $derived(mergeCheckpoints());
 
@@ -46,7 +47,7 @@
 <div class="mt-2 flex w-full justify-center">
   <div class="font-chivomono flex h-86 flex-col flex-wrap items-center gap-x-60 gap-y-3 text-3xl">
     {#each merged.entries() as [checkpoint, time]}
-      <div class="relative flex items-center justify-center">
+      <div in:slide class="relative flex items-center justify-center">
         {#if checkpoint.includes('Course')}
           <span
             class="border-overlay-orange/70 absolute bottom-1.5 h-full w-90 rounded-lg border-t-3 hue-rotate-{settings.hueRotate}"
@@ -55,13 +56,19 @@
         <span class="flex">{csToTime(time * 100)}</span>
         {#if leftCheckpointTimes.has(checkpoint) && rightCheckpointTimes.has(checkpoint)}
           {#if leftCheckpointTimes.get(checkpoint) < rightCheckpointTimes.get(checkpoint)}
-            <span class="bg-tempus-green/60 absolute right-40 rounded-lg px-2.5 py-1 text-2xl">
+            <span
+              in:fade
+              class="bg-tempus-green/60 absolute right-40 rounded-lg px-2.5 py-1 text-2xl"
+            >
               {(leftCheckpointTimes.get(checkpoint) - rightCheckpointTimes.get(checkpoint)).toFixed(
                 1
               )}
             </span>
           {:else}
-            <span class="bg-tempus-green/60 absolute left-40 rounded-lg px-2.5 py-1 text-2xl">
+            <span
+              in:fade
+              class="bg-tempus-green/60 absolute left-40 rounded-lg px-2.5 py-1 text-2xl"
+            >
               {(rightCheckpointTimes.get(checkpoint) - leftCheckpointTimes.get(checkpoint)).toFixed(
                 1
               )}
