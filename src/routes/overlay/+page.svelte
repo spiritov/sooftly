@@ -12,6 +12,7 @@
   import { fade, slide } from 'svelte/transition';
 
   import WebSocketTimer from '$lib/components/overlay/WebSocketTimer.svelte';
+  import WebSocketCheckpoints from '$lib/components/overlay/WebSocketCheckpoints.svelte';
 
   function handleWebSocketData(data) {
     // track 0 is a map run
@@ -33,7 +34,8 @@
         timer_stop(side);
         break;
       case 'timer_checkpoint':
-        timer_checkpoint(side, data.time);
+        console.log('sending checkpoint to side ' + side);
+        timer_checkpoint(side, data.formattedCheckpoint, data.time);
         break;
       case 'timer_finish':
         timer_finish(side, data.time);
@@ -138,6 +140,9 @@
     {@render POVs()}
   {/if}
   {@render stageAndMap()}
+  {#if settings.useWebSocket && settings.useWebSocketToken !== '' && settings.leftName.steamid && settings.rightName.steamid}
+    <WebSocketCheckpoints />
+  {/if}
 </div>
 
 {#snippet topBar(side)}
@@ -185,7 +190,7 @@
 {/snippet}
 
 {#snippet POVs()}
-  <div transition:slide class="bg-palewhite/50 flex h-[540px] w-full">
+  <div transition:slide class="bg-palewhite/50 flex h-[540px] w-full shrink-0">
     {#each { length: 2 }}
       <div
         class="flex basis-1/2 items-center justify-center border-white text-3xl first:border-r-[1px]"

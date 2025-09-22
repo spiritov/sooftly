@@ -1,40 +1,16 @@
 <script>
-  import { leftTimer, rightTimer, resetTimer, resetPulse } from '$lib/stores/websocket.svelte';
+  import {
+    leftTimer,
+    rightTimer,
+    resetTimer,
+    resetPulse,
+    csToTime
+  } from '$lib/stores/websocket.svelte';
   let leftCs = $state(0);
   let rightCs = $state(0);
   let leftTime = $derived(csToTime(leftCs));
   let rightTime = $derived(csToTime(rightCs));
   const updateInterval = 77;
-
-  // for finish (and stopwatch..?) time
-  function csToTime(cs) {
-    const minutes = Math.floor(cs / 6000)
-      .toString()
-      .padStart(2, '0');
-    const seconds = Math.floor((cs / 100) % 60)
-      .toString()
-      .padStart(2, '0');
-    const centiseconds = Math.floor(cs % 100)
-      .toString()
-      .padStart(2, '0');
-
-    return `${minutes}:${seconds}.${centiseconds}`;
-  }
-
-  // for stopwatch time
-  function dsToTime(ds) {
-    const minutes = Math.floor(ds / 600)
-      .toString()
-      .padStart(2, '0');
-    const seconds = Math.floor((ds / 10) % 60)
-      .toString()
-      .padStart(2, '0');
-    const deciseconds = Math.floor(ds % 10)
-      .toString()
-      .padStart(2, '0');
-
-    return `${minutes}:${seconds}.${deciseconds}`;
-  }
 
   $effect(() => {
     if (resetPulse.state) {

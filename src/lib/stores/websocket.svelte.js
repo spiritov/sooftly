@@ -1,18 +1,29 @@
+import { SvelteMap } from 'svelte/reactivity';
+
 export const leftTimer = $state({
   timer_start: false,
   timer_stop: false,
   timer_finish: false,
-  finishTime: 0,
-  checkpointTimes: []
+  finishTime: 0
 });
 
 export const rightTimer = $state({
   timer_start: false,
   timer_stop: false,
   timer_finish: false,
-  finishTime: 0,
-  checkpointTimes: []
+  finishTime: 0
 });
+
+export const leftCheckpointTimes = new SvelteMap([
+  ['Checkpoint 1', 58.1200213],
+  ['Checkpoint 2', 70.721338219],
+  ['Course 1', 119.234234934]
+]);
+export const rightCheckpointTimes = new SvelteMap([
+  ['Checkpoint 1', 48.5900213],
+  ['Checkpoint 2', 74.381338219],
+  ['Course 1', 138.234234934]
+]);
 
 // don't start timer if already finished
 export function timer_start(side) {
@@ -41,21 +52,20 @@ export function timer_finish(side, finishTime) {
     leftTimer.timer_start = false;
     leftTimer.timer_finish = true;
     leftTimer.finishTime = finishTime;
-    leftTimer.checkpointTimes.push(finishTime);
+    leftCheckpointTimes.set('finish', finishTime);
   } else {
     rightTimer.timer_start = false;
     rightTimer.timer_finish = true;
     rightTimer.finishTime = finishTime;
-    rightTimer.checkpointTimes.push(finishTime);
+    rightCheckpointTimes.set('finish', finishTime);
   }
 }
 
-export function timer_checkpoint(side, checkpointTime) {
+export function timer_checkpoint(side, checkpointName, checkpointTime) {
   if (side === 'left') {
-    leftTimer.checkpointTimes.push(checkpointTime);
-    console.log(leftTimer.checkpointTimes);
+    leftCheckpointTimes.set(checkpointName, checkpointTime);
   } else {
-    rightTimer.checkpointTimes.push(checkpointTime);
+    rightCheckpointTimes.set(checkpointName, checkpointTime);
   }
 }
 
@@ -76,5 +86,19 @@ const defaultTimer = {
   timer_stop: false,
   timer_finish: false,
   finishTime: 0,
-  checkpointTimes: []
+  checkpointTimes: new SvelteMap([])
 };
+
+export function csToTime(cs) {
+  const minutes = Math.floor(cs / 6000)
+    .toString()
+    .padStart(2, '0');
+  const seconds = Math.floor((cs / 100) % 60)
+    .toString()
+    .padStart(2, '0');
+  const centiseconds = Math.floor(cs % 100)
+    .toString()
+    .padStart(2, '0');
+
+  return `${minutes}:${seconds}.${centiseconds}`;
+}
