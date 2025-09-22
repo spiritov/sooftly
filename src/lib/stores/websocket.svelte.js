@@ -14,16 +14,8 @@ export const rightTimer = $state({
   finishTime: 0
 });
 
-export const leftCheckpointTimes = new SvelteMap([
-  ['Checkpoint 1', 58.1200213],
-  ['Checkpoint 2', 70.721338219],
-  ['Course 1', 119.234234934]
-]);
-export const rightCheckpointTimes = new SvelteMap([
-  ['Checkpoint 1', 48.5900213],
-  ['Checkpoint 2', 74.381338219],
-  ['Course 1', 138.234234934]
-]);
+export const leftCheckpointTimes = new SvelteMap([]);
+export const rightCheckpointTimes = new SvelteMap([]);
 
 // don't start timer if already finished
 export function timer_start(side) {
