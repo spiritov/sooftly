@@ -33,7 +33,7 @@
 
     for (const [checkpoint, time] of rightCheckpointTimes.entries()) {
       if (merged.has(checkpoint)) {
-        if (merged.get(checkpoint) > rightCheckpointTimes.entries()) {
+        if (merged.get(checkpoint) > time) {
           merged.set(checkpoint, time);
         }
       } else {
@@ -57,7 +57,7 @@
         {#if leftCheckpointTimes.has(checkpoint) && rightCheckpointTimes.has(checkpoint)}
           {#if leftCheckpointTimes.get(checkpoint) < rightCheckpointTimes.get(checkpoint)}
             <span
-              in:fade
+              transition:fade
               class="bg-tempus-green/60 absolute right-40 rounded-lg px-2.5 py-1 text-2xl"
             >
               {(leftCheckpointTimes.get(checkpoint) - rightCheckpointTimes.get(checkpoint)).toFixed(
@@ -66,7 +66,7 @@
             </span>
           {:else}
             <span
-              in:fade
+              transition:fade|global
               class="bg-tempus-green/60 absolute left-40 rounded-lg px-2.5 py-1 text-2xl"
             >
               {(rightCheckpointTimes.get(checkpoint) - leftCheckpointTimes.get(checkpoint)).toFixed(
