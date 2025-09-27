@@ -117,7 +117,7 @@
 </script>
 
 <div class="font-{settings.font.toLowerCase()} flex h-screen w-screen flex-col overflow-hidden">
-  <div class="relative flex h-32 w-full shrink-0">
+  <div class="relative flex h-32 w-full shrink-0 opacity-0">
     {#if settings.useWebSocket && settings.useWebSocketToken !== '' && settings.leftName.steamid && settings.rightName.steamid}
       <WebSocketTimer />
       {#if !wsConnected}
