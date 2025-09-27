@@ -12,6 +12,7 @@
   import { slide, fade } from 'svelte/transition';
 
   let merged = $derived(mergeCheckpoints());
+  let size = $derived(merged.size);
 
   if (browser) {
     // update initial settings from localStorage (font only..)
@@ -45,7 +46,11 @@
 </script>
 
 <div class="mt-2 flex w-full justify-center">
-  <div class="font-chivomono flex h-86 flex-col flex-wrap items-center gap-x-60 gap-y-3 text-3xl">
+  <div
+    class="font-chivomono flex h-83 flex-col flex-wrap items-center gap-x-60 {size > 14
+      ? 'gap-y-1 text-2xl'
+      : 'gap-y-3 text-3xl'}"
+  >
     {#each merged.entries() as [checkpoint, time]}
       <div in:slide class="relative flex items-center justify-center">
         {#if checkpoint.includes('Course')}
@@ -58,7 +63,9 @@
           {#if leftCheckpointTimes.get(checkpoint) < rightCheckpointTimes.get(checkpoint)}
             <span
               transition:fade
-              class="bg-tempus-green/60 absolute right-40 rounded-lg px-2.5 py-1 text-2xl"
+              class="bg-tempus-green/60 absolute rounded-lg px-2.5 {size > 14
+                ? 'right-32 py-0.5 text-xl'
+                : 'right-40 py-1 text-2xl'}"
             >
               {(leftCheckpointTimes.get(checkpoint) - rightCheckpointTimes.get(checkpoint)).toFixed(
                 1
@@ -67,7 +74,9 @@
           {:else}
             <span
               transition:fade|global
-              class="bg-tempus-green/60 absolute left-40 rounded-lg px-2.5 py-1 text-2xl"
+              class="bg-tempus-green/60 absolute rounded-lg px-2.5 {size > 14
+                ? 'left-32 py-0.5 text-xl'
+                : 'left-40 py-1 text-2xl'}"
             >
               {(rightCheckpointTimes.get(checkpoint) - leftCheckpointTimes.get(checkpoint)).toFixed(
                 1
