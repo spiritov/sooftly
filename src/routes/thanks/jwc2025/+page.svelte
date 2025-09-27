@@ -18,7 +18,7 @@
 
 <div class="font-{settings.font.toLowerCase()} flex flex-col items-center gap-12 pt-8 text-center">
   <span
-    class="from-lavender via-palewhite to-lavender w-full bg-gradient-to-r from-25% to-75% bg-clip-text text-6xl text-transparent"
+    class="from-lavender via-palewhite to-lavender w-full bg-gradient-to-r from-25% to-75% bg-clip-text text-6xl/18 text-transparent"
     >See you next year !</span
   >
 

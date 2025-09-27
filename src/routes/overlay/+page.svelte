@@ -13,7 +13,6 @@
 
   import WebSocketTimer from '$lib/components/overlay/WebSocketTimer.svelte';
   import WebSocketCheckpoints from '$lib/components/overlay/WebSocketCheckpoints.svelte';
-  import { nonpassive } from 'svelte/legacy';
 
   function handleWebSocketData(data) {
     // track 0 is a map run

@@ -62,7 +62,7 @@
         {#if leftCheckpointTimes.has(checkpoint) && rightCheckpointTimes.has(checkpoint)}
           {#if leftCheckpointTimes.get(checkpoint) < rightCheckpointTimes.get(checkpoint)}
             <span
-              transition:fade
+              transition:fade|global
               class="bg-tempus-green/60 absolute rounded-lg px-2.5 {size > 14
                 ? 'right-32 py-0.5 text-xl'
                 : 'right-40 py-1 text-2xl'}"
