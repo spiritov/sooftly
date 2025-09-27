@@ -13,6 +13,7 @@
 
   import WebSocketTimer from '$lib/components/overlay/WebSocketTimer.svelte';
   import WebSocketCheckpoints from '$lib/components/overlay/WebSocketCheckpoints.svelte';
+  import { nonpassive } from 'svelte/legacy';
 
   function handleWebSocketData(data) {
     // track 0 is a map run
@@ -120,7 +121,7 @@
     {#if settings.useWebSocket && settings.useWebSocketToken !== '' && settings.leftName.steamid && settings.rightName.steamid}
       <WebSocketTimer />
       {#if !wsConnected}
-        <span in:fade class="absolute z-999 h-screen w-full bg-black/60 p-64 text-4xl"
+        <span in:fade class="absolute z-999 h-screen w-full bg-black/0 text-4xl"
           >WebSocket connecting...
           <span class="text-palewhite/60 text-3xl"
             >(if this takes more than a few seconds after setting the token, it's likely failed.)</span
@@ -128,7 +129,7 @@
         >
       {:else}
         <span
-          class="absolute z-999 h-screen w-full bg-black/60 p-64 text-4xl opacity-0 transition-opacity delay-1000 duration-1000 starting:opacity-100"
+          class="absolute z-999 h-screen w-full bg-black/0 p-64 text-4xl opacity-0 transition-opacity delay-1000 duration-1000 starting:opacity-100"
           >WebSocket connected.</span
         >
       {/if}
@@ -161,7 +162,7 @@
       <img
         class="relative z-50 flex h-24 w-fit rounded-lg"
         src="https://countryflagsapi.netlify.app/flag/{settings[side + 'Flag']}.svg"
-        alt="flag"
+        alt=""
       />
     {/if}
     <div class="flex flex-col gap-2 text-5xl">
@@ -190,7 +191,7 @@
 {/snippet}
 
 {#snippet POVs()}
-  <div transition:slide class="bg-palewhite/50 flex h-[540px] w-full shrink-0">
+  <div transition:slide class="bg-palewhite/50 flex h-[540px] w-full shrink-0 opacity-0">
     {#each { length: 2 }}
       <div
         class="flex basis-1/2 items-center justify-center border-white text-3xl first:border-r-[1px]"
