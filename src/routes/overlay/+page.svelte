@@ -117,11 +117,11 @@
 </script>
 
 <div class="font-{settings.font.toLowerCase()} flex h-screen w-screen flex-col overflow-hidden">
-  <div class="relative flex h-32 w-full shrink-0 opacity-0">
+  <div class="relative flex h-32 w-full shrink-0">
     {#if settings.useWebSocket && settings.useWebSocketToken !== '' && settings.leftName.steamid && settings.rightName.steamid}
       <WebSocketTimer />
       {#if !wsConnected}
-        <span in:fade class="absolute z-999 h-screen w-full bg-black/0 text-4xl"
+        <span in:fade class="absolute z-999 h-screen w-full bg-black/0 text-4xl opacity-0"
           >WebSocket connecting...
           <span class="text-palewhite/60 text-3xl"
             >(if this takes more than a few seconds after setting the token, it's likely failed.)</span
@@ -129,7 +129,7 @@
         >
       {:else}
         <span
-          class="absolute z-999 h-screen w-full bg-black/0 p-64 text-4xl opacity-0 transition-opacity delay-1000 duration-1000 starting:opacity-100"
+          class="absolute z-999 h-screen w-full bg-black/0 p-64 text-4xl opacity-0 transition-opacity delay-1000 duration-1000"
           >WebSocket connected.</span
         >
       {/if}
