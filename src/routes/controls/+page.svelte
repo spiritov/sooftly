@@ -3,6 +3,7 @@
   import Inputs from '$lib/components/controls/Inputs.svelte';
   import PlayerSelect from '$lib/components/controls/PlayerSelect.svelte';
   import Settings from '$lib/components/controls/Settings.svelte';
+  import ResetTimers from '$lib/components/controls/ResetTimers.svelte';
 
   import { settings, categories } from '$lib/stores/settings.svelte';
   import StageSelect from '$lib/components/controls/StageSelect.svelte';
@@ -48,6 +49,10 @@
       <Settings />
       {@render separator('w-96')}
     </div>
+
+    {#if settings.useWebSocket && settings.useWebSocketToken != ''}
+      <ResetTimers />
+    {/if}
 
     <BestOf />
 

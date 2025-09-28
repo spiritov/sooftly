@@ -7,6 +7,7 @@ export const defaultSettings = {
   useSinglePOV: false,
   useWebSocket: false,
   useWebSocketToken: '',
+  usePOVDimensions: false,
   hueRotate: 0,
   bestOf: 3,
   maxScore: 2,
@@ -19,7 +20,8 @@ export const defaultSettings = {
   leftScore: 0,
   rightScore: 0,
   map: '',
-  stage: ''
+  stage: '',
+  resetPulse: false
 };
 
 export const defaultStages = [
@@ -50,6 +52,7 @@ export const settings = $state({
   useSinglePOV: false,
   useWebSocket: false,
   useWebSocketToken: '',
+  usePOVDimensions: false,
   hueRotate: 0,
   bestOf: 3,
   maxScore: 2,
@@ -64,5 +67,6 @@ export const settings = $state({
   leftScore: 0,
   rightScore: 0,
   map: '',
-  stage: ''
+  stage: '',
+  resetPulse: false
 });

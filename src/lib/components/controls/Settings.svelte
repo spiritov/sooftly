@@ -38,11 +38,16 @@
         />
       {/each}
     </div>
+
+    <CheckboxOption
+      description={'display POV dimensions'}
+      bind:checked={settings.usePOVDimensions}
+    />
     <CheckboxOption description={'use team colors'} bind:checked={settings.useTeamColors} />
     {#if !settings.useTeamColors}
       <RangeOption bind:value={settings.hueRotate} />
     {/if}
-    <CheckboxOption description={'use PRs'} bind:checked={settings.usePR} />
+    <CheckboxOption description={'display PRs'} bind:checked={settings.usePR} />
     {#if !settings.useSinglePOV}
       <CheckboxOption description={'use teams'} bind:checked={settings.useTeams} />
     {/if}

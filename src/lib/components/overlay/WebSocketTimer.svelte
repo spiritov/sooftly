@@ -16,6 +16,8 @@
     if (resetPulse.state) {
       leftCs = 0;
       rightCs = 0;
+      resetTimer('left');
+      resetTimer('right');
       resetPulse.state = false;
     }
   });
