@@ -1,7 +1,7 @@
 > ## sooftly - simple obs overlay for tourneys (localstorage yay)
 
 > [!IMPORTANT]
-> This overlay was originally created for use in TF2 jump tournaments. I've archived it since I want to have a more general-purpose and easier to maintain version available, which can be found at [https://github.com/spiritov/sooft](https://github.com/spiritov/sooft)
+> This overlay was originally created for specialized use in TF2 jump tournaments. I've archived it since I want to have a more general-purpose and easier to maintain version available, which can be found at [https://github.com/spiritov/sooft](https://github.com/spiritov/sooft)
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4318d835-1f35-4dbb-9422-55c11fba3e46" />
 
