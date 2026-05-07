@@ -22,14 +22,14 @@
 
 ## usage for obs
 1. Docks -> Custom Browser Docks
-2. set [https://spiritov.github.io/sooftly/build/controls](https://spiritov.github.io/sooftly/build/controls) for URL
+2. set [https://sooftly.dreamyard.xyz/build/controls](https://sooftly.dreamyard.xyz/build/controls) for URL
 3. Sources -> Add Source -> Browser
-4. set [https://spiritov.github.io/sooftly/build/overlay](https://spiritov.github.io/sooftly/build/overlay) for URL, ideally 1920x1080 for dimensions, and remove any custom css unless you'd like to override styles
+4. set [https://sooftly.dreamyard.xyz/build/overlay](https://sooftly.dreamyard.xyz/build/overlay) for URL, ideally 1920x1080 for dimensions, and remove any custom css unless you'd like to override styles
 5. add a background below the overlay. the background from the image above can be used as browser source [from this link](https://spiritov.github.io/web-snippets/jumple%20active%20background/index.html)
 > [!NOTE]
 > the maps page is optional, and generally intended for use with Tempus Network maps
 6. Sources -> Add Source -> Browser
-7. set [https://spiritov.github.io/sooftly/build/maps](https://spiritov.github.io/sooftly/build/maps) for URL
+7. set [https://sooftly.dreamyard.xyz/build/maps](https://sooftly.dreamyard.xyz/build/maps) for URL
 8. select the source -> Interact
 9. use `r` key to reset map pick / bans, `left click` to pick, `right click` to ban
 
